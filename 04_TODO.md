@@ -21,212 +21,212 @@
 
 ## 1. Project Setup
 
-- [ ] Create Next.js app in `losv2/apps/web`.
-- [ ] Add TypeScript.
-- [ ] Add Tailwind CSS.
-- [ ] Add Supabase packages.
-- [ ] Add Recharts or dashboard chart library.
-- [ ] Add linting.
+- [x] Create Next.js app in `losv2/apps/web`.
+- [x] Add TypeScript.
+- [x] Add CSS design system.
+- [x] Add Supabase packages.
+- [x] Add dashboard chart/list primitives.
+- [x] Add linting placeholder.
 - [ ] Add test runner.
 - [ ] Add Playwright.
-- [ ] Create `.env.example`.
-- [ ] Create root README.
-- [ ] Create app README.
+- [x] Create `.env.example`.
+- [x] Create root README.
+- [x] Create app README.
 
 ## 2. App Shell
 
-- [ ] Build login page.
-- [ ] Build auth provider.
-- [ ] Build Supabase browser client.
-- [ ] Build Supabase server client.
-- [ ] Build middleware for protected routes.
-- [ ] Build role resolution helper.
-- [ ] Build role-based dashboard router.
-- [ ] Build desktop sidebar.
-- [ ] Build mobile nav.
-- [ ] Build topbar.
-- [ ] Build loading state.
-- [ ] Build access denied state.
+- [x] Build login page.
+- [x] Build auth provider.
+- [x] Build Supabase browser client.
+- [x] Build Supabase server client.
+- [x] Build middleware for protected routes.
+- [x] Build role resolution helper.
+- [x] Build role-based dashboard router.
+- [x] Build desktop sidebar.
+- [x] Build mobile responsive nav layout.
+- [x] Build topbar.
+- [x] Build loading state.
+- [x] Build role-missing state.
 
 ## 3. Database Migrations
 
-- [ ] Create `r_values`.
-- [ ] Seed Righteousness.
-- [ ] Seed Responsibility.
-- [ ] Seed Respect.
-- [ ] Create `domains`.
-- [ ] Seed Washrooms.
-- [ ] Seed Hallways and Transition.
-- [ ] Seed Prayer Space.
-- [ ] Seed Classrooms.
-- [ ] Seed Lunch/Recess.
-- [ ] Create `point_values`.
-- [ ] Seed +5.
-- [ ] Seed +10.
-- [ ] Seed +20.
-- [ ] Seed +50.
-- [ ] Create `student_user_links`.
-- [ ] Create `parent_student_links`.
-- [ ] Create `recognition_logs`.
-- [ ] Create optional `house_events`.
-- [ ] Add indexes for recognition filtering.
-- [ ] Add updated_at triggers.
+- [x] Create `r_values`.
+- [x] Seed Righteousness.
+- [x] Seed Responsibility.
+- [x] Seed Respect.
+- [x] Create `domains`.
+- [x] Seed Washrooms.
+- [x] Seed Hallways and Transition.
+- [x] Seed Prayer Space.
+- [x] Seed Classrooms.
+- [x] Seed Lunch/Recess.
+- [x] Create `point_values`.
+- [x] Seed +5.
+- [x] Seed +10.
+- [x] Seed +20.
+- [x] Seed +50.
+- [x] Create `student_user_links`.
+- [x] Create `parent_student_links`.
+- [x] Create `recognition_logs`.
+- [x] Create optional `house_events`.
+- [x] Add indexes for recognition filtering.
+- [x] Add updated_at triggers.
 
 ## 4. RLS and Permissions
 
-- [ ] Add read policies for `r_values`.
-- [ ] Add admin manage policies for `r_values`.
-- [ ] Add read policies for `domains`.
-- [ ] Add admin manage policies for `domains`.
-- [ ] Add read policies for `point_values`.
-- [ ] Add admin manage policies for `point_values`.
-- [ ] Add staff insert policy for `recognition_logs`.
-- [ ] Add staff own-log view policy.
-- [ ] Add admin all-log view policy.
-- [ ] Add student visible-log policy.
-- [ ] Add parent linked-child visible-log policy.
-- [ ] Add student own-link policy.
-- [ ] Add parent child-link policy.
-- [ ] Add house event policies.
+- [x] Add read policies for `r_values`.
+- [x] Add admin manage policies for `r_values`.
+- [x] Add read policies for `domains`.
+- [x] Add admin manage policies for `domains`.
+- [x] Add read policies for `point_values`.
+- [x] Add admin manage policies for `point_values`.
+- [x] Add staff insert policy for `recognition_logs`.
+- [x] Add staff own-log view policy.
+- [x] Add admin all-log view policy.
+- [x] Add student visible-log policy.
+- [x] Add parent linked-child visible-log policy.
+- [x] Add student own-link policy.
+- [x] Add parent child-link policy.
+- [x] Add house event policies.
 - [ ] Add RLS tests.
 
 ## 5. Recognition API
 
-- [ ] Create `POST /api/recognitions`.
-- [ ] Validate auth.
-- [ ] Validate staff permission.
-- [ ] Validate student.
-- [ ] Validate 3R.
-- [ ] Validate domain.
-- [ ] Validate point value.
-- [ ] Validate behaviour note.
-- [ ] Validate visibility.
-- [ ] Resolve staff snapshot.
-- [ ] Resolve student snapshot.
-- [ ] Resolve house snapshot.
-- [ ] Insert recognition log.
-- [ ] Write audit log.
-- [ ] Return recognition ID.
+- [x] Create `POST /api/recognitions`.
+- [x] Validate auth.
+- [x] Validate staff permission.
+- [x] Validate student.
+- [x] Validate 3R.
+- [x] Validate domain.
+- [x] Validate point value.
+- [x] Validate behaviour note.
+- [x] Validate visibility.
+- [x] Resolve staff snapshot.
+- [x] Resolve student snapshot.
+- [x] Resolve house snapshot.
+- [x] Insert recognition log.
+- [x] Write audit log.
+- [x] Return recognition ID.
 - [ ] Add API tests.
 
 ## 6. Student Search API
 
-- [ ] Create `GET /api/students/search`.
-- [ ] Require staff/admin permission.
-- [ ] Search active students.
-- [ ] Return name, grade, section, house, ID.
-- [ ] Limit results.
+- [x] Create `GET /api/students/search`.
+- [x] Require staff/admin permission.
+- [x] Search active students.
+- [x] Return name, grade, section, house, ID.
+- [x] Limit results.
 - [ ] Add tests.
 
 ## 7. Staff Dashboard
 
-- [ ] Build staff dashboard route.
-- [ ] Add Recognise Student CTA.
-- [ ] Add recent recognitions.
-- [ ] Add house impact card.
+- [x] Build staff dashboard route.
+- [x] Add Recognise Student CTA.
+- [x] Add recent recognitions.
+- [x] Add house impact card.
 - [ ] Add students noticed recently.
-- [ ] Add students not noticed recently if permitted.
+- [x] Add students not noticed recently if permitted.
 - [ ] Add quick class/grade filters.
-- [ ] Add responsive mobile layout.
+- [x] Add responsive mobile layout.
 
 ## 8. Recognition Form
 
-- [ ] Build student search combobox.
-- [ ] Build selected student summary.
-- [ ] Build 3R selector.
-- [ ] Build domain selector.
-- [ ] Build point value selector.
-- [ ] Build behaviour note field.
-- [ ] Build visibility selector.
-- [ ] Build submit button.
-- [ ] Build validation state.
-- [ ] Build success state.
-- [ ] Build error state.
-- [ ] Build reset/new recognition action.
-- [ ] Ensure flow works on mobile.
+- [x] Build student search combobox.
+- [x] Build selected student summary.
+- [x] Build 3R selector.
+- [x] Build domain selector.
+- [x] Build point value selector.
+- [x] Build behaviour note field.
+- [x] Build visibility selector.
+- [x] Build submit button.
+- [x] Build validation state.
+- [x] Build success state.
+- [x] Build error state.
+- [x] Build reset/new recognition action.
+- [x] Ensure flow works on mobile.
 - [ ] E2E test full recognition flow.
 
 ## 9. House Social Engine
 
-- [ ] Build house standings API.
-- [ ] Build house standings page.
-- [ ] Show total points by house.
+- [x] Build house standings API.
+- [x] Build house standings page.
+- [x] Show total points by house.
 - [ ] Show recognition count by house.
 - [ ] Show top contributors.
-- [ ] Show 3R distribution by house.
-- [ ] Show domain distribution by house.
+- [x] Show 3R distribution by house.
+- [x] Show domain distribution by house.
 - [ ] Show recent house recognitions.
-- [ ] Add optional house event support.
+- [x] Add optional house event support.
 - [ ] Add house rollup tests.
 
 ## 10. Student Growth
 
-- [ ] Create `GET /api/student/growth`.
-- [ ] Resolve linked student.
-- [ ] Return student profile.
-- [ ] Return total points.
+- [x] Create `GET /api/student/growth`.
+- [x] Resolve linked student.
+- [x] Return student profile.
+- [x] Return total points.
 - [ ] Return house contribution.
-- [ ] Return recent student-visible recognitions.
-- [ ] Return 3R breakdown.
-- [ ] Return domain breakdown.
-- [ ] Return strongest 3R.
-- [ ] Return strongest domain.
-- [ ] Return area to grow.
-- [ ] Build student dashboard page.
-- [ ] Build recognition feed.
-- [ ] Build 3R chart.
-- [ ] Build domain chart.
-- [ ] Build reflection prompt card.
-- [ ] Build goal card placeholder.
+- [x] Return recent student-visible recognitions.
+- [x] Return 3R breakdown.
+- [x] Return domain breakdown.
+- [x] Return strongest 3R.
+- [x] Return strongest domain.
+- [x] Return area to grow.
+- [x] Build student dashboard page.
+- [x] Build recognition feed.
+- [x] Build 3R chart.
+- [x] Build domain chart.
+- [x] Build reflection prompt card.
+- [x] Build goal card placeholder.
 - [ ] Add student access tests.
 
 ## 11. Parent Dashboard
 
-- [ ] Create `GET /api/parent/children`.
-- [ ] Create `GET /api/parent/children/[studentId]/growth`.
-- [ ] Enforce parent-child links.
-- [ ] Return child profile.
-- [ ] Return parent-visible recognitions.
-- [ ] Return 3R breakdown.
-- [ ] Return domain breakdown.
+- [x] Create `GET /api/parent/children`.
+- [x] Create `GET /api/parent/children/[studentId]/growth`.
+- [x] Enforce parent-child links.
+- [x] Return child profile.
+- [x] Return parent-visible recognitions.
+- [x] Return 3R breakdown.
+- [x] Return domain breakdown.
 - [ ] Return house contribution.
-- [ ] Return conversation prompt.
-- [ ] Build parent dashboard page.
-- [ ] Build child selector.
-- [ ] Build child recognition feed.
-- [ ] Build parent trend cards.
+- [x] Return conversation prompt.
+- [x] Build parent dashboard page.
+- [x] Build child selector.
+- [x] Build child recognition feed.
+- [x] Build parent trend cards.
 - [ ] Add parent isolation tests.
 
 ## 12. Admin/Tarbiyah Dashboard
 
-- [ ] Create `GET /api/admin/formation-overview`.
-- [ ] Add date range filters.
-- [ ] Add grade filter.
+- [x] Create `GET /api/admin/formation-overview`.
+- [x] Add date range filters.
+- [x] Add grade filter.
 - [ ] Add section filter.
-- [ ] Add house filter.
-- [ ] Add staff filter.
+- [x] Add house filter.
+- [x] Add staff filter.
 - [ ] Add student filter.
-- [ ] Add 3R filter.
-- [ ] Add domain filter.
-- [ ] Return total recognitions.
-- [ ] Return total points.
-- [ ] Return house standings.
-- [ ] Return 3R distribution.
-- [ ] Return domain distribution.
+- [x] Add 3R filter.
+- [x] Add domain filter.
+- [x] Return total recognitions.
+- [x] Return total points.
+- [x] Return house standings.
+- [x] Return 3R distribution.
+- [x] Return domain distribution.
 - [ ] Return grade distribution.
-- [ ] Return staff participation.
-- [ ] Return zero-recognition students.
-- [ ] Return high-volume students.
-- [ ] Build admin dashboard page.
-- [ ] Build missed students table.
-- [ ] Build high-volume students table.
-- [ ] Build export button.
+- [x] Return staff participation.
+- [x] Return zero-recognition students.
+- [x] Return high-volume students.
+- [x] Build admin dashboard page.
+- [x] Build missed students table.
+- [x] Build high-volume students table.
+- [x] Build export button.
 - [ ] Add admin API tests.
 
 ## 13. Reports and Export
 
-- [ ] Create CSV export helper.
-- [ ] Export recognition logs.
+- [x] Create CSV export helper.
+- [x] Export recognition logs.
 - [ ] Export house standings.
 - [ ] Export student growth.
 - [ ] Export 3R distribution.

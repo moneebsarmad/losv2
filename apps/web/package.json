@@ -1,0 +1,27 @@
+{
+  "name": "league-of-stars-v2-web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "node -e \"console.log('lint configured via typecheck/build for now')\"",
+    "typecheck": "next typegen && tsc --noEmit"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.89.0",
+    "lucide-react": "^0.468.0",
+    "next": "^16.1.0",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "recharts": "^3.6.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  }
+}
