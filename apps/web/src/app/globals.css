@@ -71,12 +71,12 @@ button {
 }
 
 .auth-hero::before {
-  background: url("/images/brighter-horizons-campus.jpg") center 42% / 100% auto no-repeat;
-  opacity: 0.72;
+  background: url("/images/bha-lockers.jpg") center / cover no-repeat;
+  opacity: 0.88;
 }
 
 .auth-hero::after {
-  background: linear-gradient(180deg, rgba(19, 35, 55, 0.48), rgba(19, 35, 55, 0.18) 48%, rgba(19, 35, 55, 0.04));
+  background: linear-gradient(180deg, rgba(19, 35, 55, 0.42), rgba(19, 35, 55, 0.2) 46%, rgba(19, 35, 55, 0.08));
 }
 
 .auth-hero > * {
@@ -533,8 +533,8 @@ button {
   }
 
   .auth-hero::before {
-    background-size: 110% auto;
-    background-position: center 46%;
+    background-size: cover;
+    background-position: center;
   }
 
   .auth-panel {
