@@ -120,12 +120,11 @@ button {
   gap: 6px;
 }
 
-.auth-eyebrow {
-  color: #ffe7a3;
+.eyebrow.auth-eyebrow {
+  color: #ffffff;
   font-size: 13px;
   font-weight: 900;
   letter-spacing: 0.16em;
-  -webkit-text-stroke: 0.35px rgba(5, 12, 24, 0.9);
   text-shadow:
     0 1px 2px rgba(5, 12, 24, 1),
     0 3px 18px rgba(5, 12, 24, 0.9);
