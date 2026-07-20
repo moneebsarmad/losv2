@@ -13,6 +13,7 @@ supabase/.temp/
 .env
 .env.*
 !.env.example
+losv2_login_credentials.txt
 
 # logs
 npm-debug.log*

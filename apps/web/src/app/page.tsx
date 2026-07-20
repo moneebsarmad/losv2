@@ -27,34 +27,18 @@ export default function LoginPage() {
 
   return (
     <main className="auth-page">
-      <section className="auth-hero">
-        <div className="brand-lockup">
-          <div className="brand-mark">
-            <img src={SCHOOL_CREST} alt="" />
+      <div className="auth-glass-panel">
+        <div className="auth-brand">
+          <div className="auth-crest">
+            <img src={SCHOOL_CREST} alt={SCHOOL_NAME} />
           </div>
-          <div>
-            <p className="eyebrow">{SCHOOL_NAME}</p>
-            <strong>{APP_NAME}</strong>
-          </div>
+          <p className="eyebrow auth-eyebrow">{SCHOOL_NAME}</p>
+          <strong className="auth-title">{APP_NAME}</strong>
         </div>
-        <div className="auth-visual" aria-hidden="true">
-          <img src="/images/bha-lockers.jpg" alt="" />
-        </div>
-      </section>
 
-      <section className="auth-panel">
         <form className="auth-card" onSubmit={handleSubmit}>
-          <div className="brand-lockup">
-            <div className="brand-mark">
-              <img src={SCHOOL_CREST} alt="" />
-            </div>
-            <div>
-              <p className="eyebrow">Secure Portal</p>
-              <strong>{APP_NAME}</strong>
-            </div>
-          </div>
           <h2>Welcome back</h2>
-          <p className="muted">Sign in to recognize meaningful moments and track 3R growth.</p>
+          <p className="auth-subtitle">Sign in to recognize meaningful moments and track 3R growth.</p>
 
           <div className="field">
             <label htmlFor="email">Email</label>
@@ -84,12 +68,12 @@ export default function LoginPage() {
 
           {message ? <div className="error">{message}</div> : null}
 
-          <button className="btn btn-primary full" type="submit" disabled={loading || !email || !password}>
+          <button className="btn btn-gold full" type="submit" disabled={loading || !email || !password}>
             {loading ? 'Signing in...' : 'Continue'}
             <ArrowRight size={18} />
           </button>
         </form>
-      </section>
+      </div>
     </main>
   )
 }
