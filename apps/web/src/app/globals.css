@@ -80,6 +80,7 @@ button {
   gap: 6px;
   margin-bottom: 24px;
   text-align: center;
+  transform: translateY(clamp(-170px, -13vh, -120px));
 }
 
 .auth-crest {
@@ -583,6 +584,10 @@ button {
   .auth-crest img {
     width: 128px;
     height: 128px;
+  }
+
+  .auth-brand {
+    transform: translateY(-36px);
   }
 
   .auth-card {
