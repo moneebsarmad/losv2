@@ -37,6 +37,9 @@ export default function LoginPage() {
             <strong>{APP_NAME}</strong>
           </div>
         </div>
+        <div className="auth-visual" aria-hidden="true">
+          <img src="/images/bha-lockers.jpg" alt="" />
+        </div>
       </section>
 
       <section className="auth-panel">
