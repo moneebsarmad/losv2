@@ -1,5 +1,5 @@
 export const APP_NAME = 'League of Stars'
-export const SCHOOL_NAME = 'Brighter Horizon Academy'
+export const SCHOOL_NAME = 'Brighter Horizons Academy'
 
 export const R_VALUES = [
   { key: 'righteousness', name: 'Righteousness' },
