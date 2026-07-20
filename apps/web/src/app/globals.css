@@ -52,33 +52,36 @@ button {
 }
 
 .auth-hero {
+  position: relative;
+  overflow: hidden;
   min-height: 100vh;
   padding: 48px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   color: white;
-  background:
-    linear-gradient(rgba(19, 35, 55, 0.72), rgba(19, 35, 55, 0.88)),
-    url("/images/brighter-horizons-campus.jpg");
-  background-size: cover;
-  background-position: center;
+  background: linear-gradient(180deg, #e9eff0 0%, #f7f4ee 100%);
 }
 
-.auth-hero h1 {
-  margin: 0;
-  max-width: 720px;
-  font-size: clamp(44px, 7vw, 88px);
-  line-height: 0.95;
-  letter-spacing: 0;
+.auth-hero::before,
+.auth-hero::after {
+  position: absolute;
+  inset: 0;
+  content: '';
 }
 
-.auth-hero p {
-  max-width: 620px;
-  margin: 22px 0 0;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 18px;
-  line-height: 1.6;
+.auth-hero::before {
+  background: url("/images/brighter-horizons-campus.jpg") center 42% / 100% auto no-repeat;
+  opacity: 0.72;
+}
+
+.auth-hero::after {
+  background: linear-gradient(180deg, rgba(19, 35, 55, 0.48), rgba(19, 35, 55, 0.18) 48%, rgba(19, 35, 55, 0.04));
+}
+
+.auth-hero > * {
+  position: relative;
+  z-index: 1;
 }
 
 .auth-panel {
@@ -527,6 +530,11 @@ button {
   .auth-hero {
     min-height: 42vh;
     padding: 32px 22px;
+  }
+
+  .auth-hero::before {
+    background-size: 110% auto;
+    background-position: center 46%;
   }
 
   .auth-panel {

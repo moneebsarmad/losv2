@@ -37,13 +37,6 @@ export default function LoginPage() {
             <strong>{APP_NAME}</strong>
           </div>
         </div>
-        <div>
-          <h1>Recognition that builds house culture and 3R growth.</h1>
-          <p>
-            Staff notice meaningful moments, students strengthen their house, parents see approved growth, and
-            Tarbiyah leaders can see who is being noticed.
-          </p>
-        </div>
       </section>
 
       <section className="auth-panel">
@@ -57,8 +50,8 @@ export default function LoginPage() {
               <strong>{APP_NAME}</strong>
             </div>
           </div>
-          <h2>Sign in</h2>
-          <p className="muted">Use your BHA account to continue.</p>
+          <h2>Welcome back</h2>
+          <p className="muted">Sign in to recognize meaningful moments and track 3R growth.</p>
 
           <div className="field">
             <label htmlFor="email">Email</label>
