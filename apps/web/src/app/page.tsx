@@ -40,7 +40,7 @@ export default function LoginPage() {
       <div className="auth-glass-panel">
         <form className="auth-card" onSubmit={handleSubmit}>
           <h2>Welcome back</h2>
-          <p className="auth-subtitle">Sign in to recognize meaningful moments and track 3R growth.</p>
+          <p className="auth-subtitle">Sign in to continue to League of Stars.</p>
 
           <div className="field">
             <label htmlFor="email">Email</label>
