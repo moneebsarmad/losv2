@@ -91,7 +91,7 @@ export function AppShell({ role, userName, children }: AppShellProps) {
           })}
         </nav>
         <div style={{ marginTop: 'auto' }}>
-          <p className="muted" style={{ color: 'rgba(255,255,255,.55)' }}>
+          <p className="sidebar-tagline">
             3Rs power recognition. Houses power belonging.
           </p>
         </div>

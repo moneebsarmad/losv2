@@ -63,10 +63,10 @@ export const HOUSE_NAMES = [
 ] as const
 
 export const HOUSE_COLORS: Record<string, string> = {
-  'House of Abu Bakr': '#5f3dc4',
-  'House of Khadijah': '#0f766e',
-  'House of Umar': '#1d4ed8',
-  'House of Aishah': '#be123c',
+  'House of Abu Bakr': '#6b2090',
+  'House of Khadijah': '#1a4f35',
+  'House of Umar': '#1a3070',
+  'House of Aishah': '#8f1c1c',
 }
 
 export const SCHOOL_CREST = '/logos/crest.png'

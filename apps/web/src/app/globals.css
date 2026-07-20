@@ -1,18 +1,23 @@
 :root {
-  --bg: #f7f4ee;
-  --surface: #fffdf8;
-  --surface-strong: #ffffff;
-  --ink: #1d2430;
-  --muted: #697386;
-  --line: #e7ddcc;
-  --gold: #ba8f22;
-  --gold-dark: #8b6819;
-  --green: #0f766e;
-  --red: #b42318;
-  --nav: #132337;
-  --nav-soft: #1e3552;
-  --radius: 14px;
-  --shadow: 0 18px 45px rgba(47, 36, 18, 0.09);
+  --bg:             #f4ead8;
+  --surface:        #fef9ef;
+  --surface-strong: #fffdf6;
+  --ink:            #181c28;
+  --muted:          #64748b;
+  --line:           rgba(180, 145, 40, 0.22);
+  --gold:           #c4911e;
+  --gold-bright:    #e4b84a;
+  --gold-dark:      #8b6412;
+  --silver:         #a8afc0;
+  --green:          #0a6b5c;
+  --red:            #9c2020;
+  --nav:            #0c1a2e;
+  --nav-soft:       #13243d;
+  --shadow-sm:      0 2px 8px rgba(12, 26, 46, 0.07);
+  --shadow:         0 8px 24px rgba(12, 26, 46, 0.10), 0 1px 4px rgba(12, 26, 46, 0.06);
+  --shadow-lg:      0 20px 48px rgba(12, 26, 46, 0.14), 0 4px 12px rgba(12, 26, 46, 0.08);
+  --font-serif:     var(--font-cormorant), 'Cormorant Garamond', Georgia, serif;
+  --font-sans:      var(--font-inter), Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 * {
@@ -23,8 +28,14 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: var(--font-sans);
+  letter-spacing: 0;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.1;
   letter-spacing: 0;
 }
 
@@ -43,6 +54,8 @@ select {
 button {
   cursor: pointer;
 }
+
+/* ── LOGIN PAGE ─────────────────────────────────────────────────────────── */
 
 .auth-page {
   min-height: 100vh;
@@ -119,8 +132,9 @@ button {
 }
 
 .auth-title {
-  font-size: 22px;
-  font-weight: 800;
+  font-family: var(--font-serif);
+  font-size: 28px;
+  font-weight: 700;
   color: white;
   letter-spacing: 0.01em;
   text-shadow: 0 2px 14px rgba(5, 12, 24, 0.55);
@@ -130,7 +144,7 @@ button {
   width: 100%;
   border: 1px solid rgba(215, 182, 95, 0.42);
   border-radius: 20px;
-  background: rgba(8, 16, 32, 0.9);
+  background: rgba(8, 16, 32, 0.90);
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(28px);
   padding: 36px 32px;
@@ -138,9 +152,10 @@ button {
 }
 
 .auth-card h2 {
+  font-family: var(--font-serif);
   margin: 0 0 8px;
-  font-size: 26px;
-  font-weight: 800;
+  font-size: 32px;
+  font-weight: 700;
   color: white;
   letter-spacing: 0;
 }
@@ -164,7 +179,7 @@ button {
 
 .auth-page .input:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 4px rgba(186, 143, 34, 0.22);
+  box-shadow: 0 0 0 3px rgba(196, 145, 30, 0.22);
 }
 
 .auth-page .error {
@@ -172,6 +187,8 @@ button {
   background: rgba(180, 35, 24, 0.18);
   color: #f87171;
 }
+
+/* ── BRAND ──────────────────────────────────────────────────────────────── */
 
 .brand-lockup {
   display: flex;
@@ -196,18 +213,28 @@ button {
   object-fit: contain;
 }
 
+.brand-lockup strong {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+/* ── TYPOGRAPHY UTILITIES ───────────────────────────────────────────────── */
+
 .eyebrow {
   margin: 0;
   color: var(--gold-dark);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
 }
 
 .muted {
   color: var(--muted);
 }
+
+/* ── FORM ───────────────────────────────────────────────────────────────── */
 
 .field {
   display: grid;
@@ -217,7 +244,7 @@ button {
 
 .field label {
   color: var(--ink);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -226,8 +253,8 @@ button {
 .textarea {
   width: 100%;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  background: white;
+  border-radius: 10px;
+  background: var(--surface-strong);
   color: var(--ink);
   padding: 12px 13px;
   outline: none;
@@ -242,25 +269,28 @@ button {
 .select:focus,
 .textarea:focus {
   border-color: var(--gold);
-  box-shadow: 0 0 0 4px rgba(186, 143, 34, 0.14);
+  box-shadow: 0 0 0 3px rgba(196, 145, 30, 0.18);
 }
+
+/* ── BUTTONS ────────────────────────────────────────────────────────────── */
 
 .btn {
   border: 0;
-  border-radius: 12px;
-  min-height: 44px;
-  padding: 0 16px;
+  border-radius: 10px;
+  min-height: 42px;
+  padding: 0 18px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 9px;
-  font-weight: 800;
-  transition: transform 0.16s ease, opacity 0.16s ease, background 0.16s ease;
+  font-size: 13px;
+  font-weight: 700;
+  transition: transform 0.16s ease, opacity 0.16s ease, box-shadow 0.16s ease;
 }
 
 .btn:disabled {
   cursor: not-allowed;
-  opacity: 0.55;
+  opacity: 0.52;
 }
 
 .btn:not(:disabled):hover {
@@ -270,16 +300,21 @@ button {
 .btn-primary {
   color: white;
   background: var(--nav);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.btn-primary:not(:disabled):hover {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08), var(--shadow-sm);
 }
 
 .btn-gold {
-  color: #211800;
-  background: linear-gradient(135deg, #d7b65f, #ba8f22);
+  color: #1a1000;
+  background: linear-gradient(135deg, #e4b84a, #c4911e);
 }
 
 .btn-soft {
   color: var(--ink);
-  background: #f1eadc;
+  background: #ede4d0;
 }
 
 .btn-danger {
@@ -291,14 +326,18 @@ button {
   width: 100%;
 }
 
+/* ── ALERTS ─────────────────────────────────────────────────────────────── */
+
 .error {
-  border: 1px solid rgba(180, 35, 24, 0.2);
-  border-radius: 12px;
-  background: rgba(180, 35, 24, 0.08);
+  border: 1px solid rgba(156, 32, 32, 0.22);
+  border-radius: 10px;
+  background: rgba(156, 32, 32, 0.07);
   color: var(--red);
   padding: 12px;
   font-size: 14px;
 }
+
+/* ── APP SHELL ──────────────────────────────────────────────────────────── */
 
 .app-shell {
   min-height: 100vh;
@@ -310,7 +349,7 @@ button {
   position: sticky;
   top: 0;
   height: 100vh;
-  background: linear-gradient(180deg, var(--nav), #0d1827);
+  background: linear-gradient(180deg, #0c1a2e 0%, #091422 100%);
   color: white;
   padding: 22px;
   display: flex;
@@ -320,27 +359,40 @@ button {
 
 .sidebar .brand-lockup {
   padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.sidebar .brand-lockup strong {
+  color: white;
 }
 
 .nav-list {
   display: grid;
-  gap: 7px;
+  gap: 4px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
   gap: 11px;
-  border-radius: 12px;
-  padding: 12px;
-  color: rgba(255, 255, 255, 0.68);
+  border-radius: 10px;
+  padding: 11px 12px;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.14s ease, color 0.14s ease;
 }
 
-.nav-item.active,
 .nav-item:hover {
-  color: white;
-  background: rgba(255, 255, 255, 0.09);
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.nav-item.active {
+  color: var(--gold-bright);
+  background: rgba(196, 145, 30, 0.14);
+  border-left: 3px solid var(--gold);
+  padding-left: 9px;
 }
 
 .main-area {
@@ -358,9 +410,11 @@ button {
   justify-content: space-between;
   gap: 18px;
   border-bottom: 1px solid var(--line);
-  background: rgba(247, 244, 238, 0.88);
+  background: rgba(244, 234, 216, 0.90);
   backdrop-filter: blur(14px);
 }
+
+/* ── PAGE LAYOUT ────────────────────────────────────────────────────────── */
 
 .page {
   padding: 28px;
@@ -376,16 +430,20 @@ button {
 
 .page-title {
   margin: 0;
-  font-size: clamp(28px, 4vw, 44px);
-  line-height: 1;
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 50px);
+  font-weight: 700;
+  line-height: 1.05;
   letter-spacing: 0;
 }
 
 .page-subtitle {
   margin: 10px 0 0;
   color: var(--muted);
-  line-height: 1.5;
+  line-height: 1.55;
 }
+
+/* ── GRID ───────────────────────────────────────────────────────────────── */
 
 .grid {
   display: grid;
@@ -408,41 +466,57 @@ button {
   grid-column: span 2;
 }
 
+/* ── CARDS ──────────────────────────────────────────────────────────────── */
+
 .card {
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  background: var(--surface-strong);
-  padding: 18px;
-  box-shadow: 0 12px 30px rgba(47, 36, 18, 0.05);
+  border-radius: 12px;
+  background: var(--surface);
+  padding: 20px;
+  box-shadow: var(--shadow);
 }
+
+/* ── METRICS ────────────────────────────────────────────────────────────── */
 
 .metric {
   display: grid;
-  gap: 6px;
+  gap: 4px;
+  border-top: 2px solid var(--gold);
 }
 
 .metric-label {
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-dark);
+  margin-top: 14px;
 }
 
 .metric-value {
-  font-size: 30px;
-  font-weight: 900;
+  font-family: var(--font-serif);
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--nav);
+  line-height: 1;
 }
+
+/* ── PILLS ──────────────────────────────────────────────────────────────── */
 
 .pill {
   display: inline-flex;
   align-items: center;
   gap: 7px;
   border-radius: 999px;
-  padding: 6px 10px;
-  background: #f0e7d6;
-  color: #6d5015;
+  padding: 5px 12px;
+  background: rgba(196, 145, 30, 0.12);
+  color: var(--gold-dark);
+  border: 1px solid rgba(196, 145, 30, 0.28);
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 700;
 }
+
+/* ── SEGMENTED / CHOICE ─────────────────────────────────────────────────── */
 
 .segmented {
   display: grid;
@@ -452,17 +526,20 @@ button {
 
 .choice {
   border: 1px solid var(--line);
-  border-radius: 12px;
-  background: white;
+  border-radius: 10px;
+  background: var(--surface-strong);
   padding: 13px;
   text-align: left;
+  transition: border-color 0.14s ease, box-shadow 0.14s ease, background 0.14s ease;
 }
 
 .choice.active {
   border-color: var(--gold);
-  background: #fff8e8;
-  box-shadow: 0 0 0 4px rgba(186, 143, 34, 0.11);
+  background: #fef8e4;
+  box-shadow: 0 0 0 3px rgba(196, 145, 30, 0.14);
 }
+
+/* ── LISTS ──────────────────────────────────────────────────────────────── */
 
 .list {
   display: grid;
@@ -474,15 +551,17 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding: 12px;
+  padding: 12px 14px;
   border: 1px solid var(--line);
-  border-radius: 12px;
-  background: white;
+  border-radius: 10px;
+  background: var(--surface-strong);
 }
 
 .list-row button {
   flex-shrink: 0;
 }
+
+/* ── TOOLBAR ────────────────────────────────────────────────────────────── */
 
 .toolbar {
   display: flex;
@@ -491,11 +570,15 @@ button {
   gap: 10px;
 }
 
+/* ── FILTER GRID ────────────────────────────────────────────────────────── */
+
 .filter-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 12px;
 }
+
+/* ── HOUSE STANDINGS ────────────────────────────────────────────────────── */
 
 .rank-row {
   display: grid;
@@ -507,16 +590,19 @@ button {
 .rank-badge {
   width: 34px;
   height: 34px;
-  border-radius: 10px;
+  border-radius: 8px;
   display: grid;
   place-items: center;
-  background: #f1eadc;
-  font-weight: 900;
+  background: rgba(196, 145, 30, 0.12);
+  color: var(--gold-dark);
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .house-dot {
-  width: 13px;
-  height: 13px;
+  width: 12px;
+  height: 12px;
   border-radius: 999px;
   display: inline-block;
   margin-right: 8px;
@@ -529,6 +615,8 @@ button {
   object-fit: contain;
   vertical-align: middle;
 }
+
+/* ── TABLE ──────────────────────────────────────────────────────────────── */
 
 .table-wrap {
   width: 100%;
@@ -550,33 +638,44 @@ button {
 }
 
 .data-table th {
-  color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--muted);
 }
 
+/* ── NOTE BOX ───────────────────────────────────────────────────────────── */
+
 .note-box {
-  border-left: 4px solid var(--gold);
-  border-radius: 12px;
-  background: #fff8e8;
-  padding: 14px;
+  border-left: 3px solid var(--gold);
+  border-radius: 10px;
+  background: rgba(196, 145, 30, 0.07);
+  padding: 14px 16px;
+  font-size: 14px;
+  line-height: 1.6;
 }
+
+/* ── AVATAR ─────────────────────────────────────────────────────────────── */
 
 .avatar {
   width: 38px;
   height: 38px;
-  border-radius: 11px;
+  border-radius: 10px;
   display: grid;
   place-items: center;
-  background: #edf2f7;
+  background: rgba(12, 26, 46, 0.08);
   color: var(--nav);
-  font-weight: 900;
+  font-weight: 800;
+  font-size: 13px;
 }
 
+/* ── PROGRESS BAR ───────────────────────────────────────────────────────── */
+
 .bar {
-  height: 10px;
+  height: 8px;
   border-radius: 999px;
-  background: #ece3d5;
+  background: rgba(180, 145, 40, 0.14);
   overflow: hidden;
 }
 
@@ -584,8 +683,20 @@ button {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: var(--gold);
+  background: linear-gradient(90deg, var(--gold), var(--gold-bright));
 }
+
+/* ── SIDEBAR FOOTER TEXT ────────────────────────────────────────────────── */
+
+.sidebar-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.5;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 900px) {
   .app-shell {
@@ -620,7 +731,7 @@ button {
   }
 
   .auth-title {
-    font-size: 18px;
+    font-size: 22px;
   }
 
   .auth-card {
@@ -648,5 +759,9 @@ button {
 
   .page-header {
     display: grid;
+  }
+
+  .metric-value {
+    font-size: 38px;
   }
 }
