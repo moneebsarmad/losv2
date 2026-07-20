@@ -70,25 +70,27 @@ button {
   align-items: center;
   width: 100%;
   max-width: 480px;
-  padding: clamp(58px, 8vh, 96px) 20px 48px;
+  padding: 24px 20px;
 }
 
 .auth-brand {
+  position: absolute;
+  z-index: 1;
+  top: clamp(36px, 4vw, 64px);
+  left: clamp(36px, 4vw, 64px);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 6px;
-  margin-bottom: 24px;
-  text-align: center;
-  transform: translateY(clamp(-170px, -13vh, -120px));
+  gap: 18px;
+  margin: 0;
+  text-align: left;
 }
 
 .auth-crest {
-  width: clamp(180px, 13vw, 240px);
-  height: clamp(180px, 13vw, 240px);
+  width: clamp(112px, 8vw, 144px);
+  height: clamp(112px, 8vw, 144px);
   display: grid;
   place-items: center;
-  margin-bottom: 0;
   filter: drop-shadow(0 10px 36px rgba(5, 12, 24, 0.32));
 }
 
@@ -98,9 +100,15 @@ button {
   object-fit: contain;
 }
 
+.auth-brand-copy {
+  display: grid;
+  gap: 6px;
+}
+
 .auth-eyebrow {
   color: var(--gold);
   letter-spacing: 0.16em;
+  text-shadow: 0 2px 14px rgba(5, 12, 24, 0.55);
 }
 
 .auth-title {
@@ -108,6 +116,7 @@ button {
   font-weight: 800;
   color: white;
   letter-spacing: 0.01em;
+  text-shadow: 0 2px 14px rgba(5, 12, 24, 0.55);
 }
 
 .auth-card {
@@ -576,18 +585,35 @@ button {
     grid-template-columns: 1fr;
   }
 
+  .auth-page {
+    align-items: flex-start;
+    overflow-y: auto;
+    padding-top: 124px;
+  }
+
   .auth-glass-panel {
     padding: 24px 16px 40px;
   }
 
-  .auth-crest,
-  .auth-crest img {
-    width: 128px;
-    height: 128px;
+  .auth-brand {
+    top: 20px;
+    left: 20px;
+    gap: 12px;
   }
 
-  .auth-brand {
-    transform: translateY(-36px);
+  .auth-crest,
+  .auth-crest img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .auth-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+  }
+
+  .auth-title {
+    font-size: 18px;
   }
 
   .auth-card {
