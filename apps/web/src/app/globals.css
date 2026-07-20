@@ -59,7 +59,7 @@ button {
   inset: 0;
   content: '';
   background:
-    linear-gradient(160deg, rgba(8, 16, 32, 0.82) 0%, rgba(13, 27, 50, 0.74) 60%, rgba(10, 20, 38, 0.88) 100%);
+    linear-gradient(160deg, rgba(8, 16, 32, 0.48) 0%, rgba(13, 27, 50, 0.36) 58%, rgba(10, 20, 38, 0.58) 100%);
 }
 
 .auth-glass-panel {
@@ -70,7 +70,7 @@ button {
   align-items: center;
   width: 100%;
   max-width: 480px;
-  padding: 32px 20px 48px;
+  padding: clamp(58px, 8vh, 96px) 20px 48px;
 }
 
 .auth-brand {
@@ -78,22 +78,22 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 6px;
-  margin-bottom: 28px;
+  margin-bottom: 24px;
   text-align: center;
 }
 
 .auth-crest {
-  width: 96px;
-  height: 96px;
+  width: clamp(180px, 13vw, 240px);
+  height: clamp(180px, 13vw, 240px);
   display: grid;
   place-items: center;
-  margin-bottom: 4px;
-  filter: drop-shadow(0 4px 24px rgba(215, 182, 95, 0.45));
+  margin-bottom: 0;
+  filter: drop-shadow(0 10px 36px rgba(5, 12, 24, 0.32));
 }
 
 .auth-crest img {
-  width: 96px;
-  height: 96px;
+  width: 100%;
+  height: 100%;
   object-fit: contain;
 }
 
@@ -113,7 +113,7 @@ button {
   width: 100%;
   border: 1px solid rgba(215, 182, 95, 0.32);
   border-radius: 20px;
-  background: rgba(8, 16, 32, 0.58);
+  background: rgba(8, 16, 32, 0.68);
   backdrop-filter: blur(22px);
   -webkit-backdrop-filter: blur(22px);
   padding: 36px 32px;
@@ -130,18 +130,18 @@ button {
 
 .auth-subtitle {
   margin: 0 0 8px;
-  color: rgba(255, 255, 255, 0.58);
+  color: rgba(255, 255, 255, 0.72);
   font-size: 14px;
   line-height: 1.55;
 }
 
 .auth-card .field label {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.88);
 }
 
 .auth-page .input {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.24);
   color: white;
 }
 
@@ -581,8 +581,8 @@ button {
 
   .auth-crest,
   .auth-crest img {
-    width: 76px;
-    height: 76px;
+    width: 128px;
+    height: 128px;
   }
 
   .auth-card {
