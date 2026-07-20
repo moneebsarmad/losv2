@@ -160,6 +160,18 @@ button {
   object-fit: contain;
 }
 
+.auth-page .brand-mark {
+  width: 72px;
+  height: 72px;
+  border-radius: 0;
+  background: transparent;
+}
+
+.auth-page .brand-mark img {
+  width: 66px;
+  height: 66px;
+}
+
 .eyebrow {
   margin: 0;
   color: var(--gold-dark);
