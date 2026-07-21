@@ -432,55 +432,96 @@ button {
   color: white;
 }
 
-/* ── NAV STRIP (horizontal navigation) ─────────────────────────────────── */
+/* ── SHELL BODY + ICON RAIL ─────────────────────────────────────────────── */
 
-.nav-strip {
-  position: sticky;
-  top: 60px;
-  z-index: 19;
-  height: 46px;
-  padding: 0 16px;
+.shell-body {
+  flex: 1;
   display: flex;
-  align-items: stretch;
-  gap: 0;
-  background: var(--surface);
-  border-bottom: 1px solid var(--line);
-  flex-shrink: 0;
-  overflow-x: auto;
-  scrollbar-width: none;
 }
 
-.nav-strip::-webkit-scrollbar {
+.icon-rail {
+  width: 56px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 60px;
+  height: calc(100vh - 60px);
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0;
+  gap: 4px;
+  background: var(--surface);
+  border-right: 1px solid var(--line);
+  z-index: 10;
+}
+
+.icon-rail::-webkit-scrollbar {
   display: none;
 }
 
 .nav-item {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
-  gap: 7px;
-  padding: 0 14px;
-  height: 100%;
-  color: var(--muted);
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-  border-bottom: 2px solid transparent;
-  transition: color 0.14s ease, border-color 0.14s ease;
+  justify-content: center;
+  color: var(--silver);
+  position: relative;
+  flex-shrink: 0;
+  transition: color 0.14s ease, background 0.14s ease;
 }
 
 .nav-item:hover {
   color: var(--ink);
+  background: rgba(12, 26, 46, 0.06);
 }
 
 .nav-item.active {
   color: var(--gold-dark);
-  border-bottom-color: var(--gold);
+  background: rgba(196, 145, 30, 0.14);
+  box-shadow: inset 0 0 0 1px rgba(196, 145, 30, 0.26);
+}
+
+/* Tooltip that appears to the right on hover */
+.nav-tooltip {
+  position: absolute;
+  left: calc(100% + 12px);
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--nav);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 5px 10px;
+  border-radius: 7px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+  z-index: 100;
+}
+
+.nav-tooltip::before {
+  content: '';
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  border: 5px solid transparent;
+  border-right-color: var(--nav);
+}
+
+.nav-item:hover .nav-tooltip {
+  opacity: 1;
 }
 
 .main-area {
   flex: 1;
   min-width: 0;
-  min-height: 0;
 }
 
 /* ── PAGE LAYOUT ────────────────────────────────────────────────────────── */
