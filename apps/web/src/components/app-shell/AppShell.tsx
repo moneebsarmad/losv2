@@ -27,31 +27,31 @@ type AppShellProps = {
 
 const navByRole: Record<PortalRole, Array<{ label: string; href: string; icon: ReactNode }>> = {
   staff: [
-    { label: 'Dashboard', href: '/dashboard', icon: <Home size={16} /> },
-    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={16} /> },
-    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={16} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={16} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={16} /> },
+    { label: 'Dashboard', href: '/dashboard', icon: <Home size={18} /> },
+    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
+    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
   ],
   student: [
-    { label: 'My Growth', href: '/dashboard/my-growth', icon: <UserRound size={16} /> },
-    { label: 'My House', href: '/dashboard/my-house', icon: <Trophy size={16} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <BarChart3 size={16} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={16} /> },
+    { label: 'My Growth', href: '/dashboard/my-growth', icon: <UserRound size={18} /> },
+    { label: 'My House', href: '/dashboard/my-house', icon: <Trophy size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <BarChart3 size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
   ],
   parent: [
-    { label: 'Child View', href: '/dashboard/parent', icon: <UserRound size={16} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={16} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={16} /> },
+    { label: 'Child View', href: '/dashboard/parent', icon: <UserRound size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
   ],
   admin: [
-    { label: 'Tarbiyah', href: '/dashboard', icon: <ShieldCheck size={16} /> },
-    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={16} /> },
-    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={16} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={16} /> },
-    { label: 'Reports', href: '/dashboard/admin/reports', icon: <BarChart3 size={16} /> },
-    { label: 'Audit', href: '/dashboard/admin/audit', icon: <FileClock size={16} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={16} /> },
+    { label: 'Tarbiyah', href: '/dashboard', icon: <ShieldCheck size={18} /> },
+    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
+    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
+    { label: 'Reports', href: '/dashboard/admin/reports', icon: <BarChart3 size={18} /> },
+    { label: 'Audit', href: '/dashboard/admin/audit', icon: <FileClock size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
   ],
 }
 
@@ -91,22 +91,31 @@ export function AppShell({ role, userName, children }: AppShellProps) {
         </div>
       </header>
 
-      <nav className="nav-strip" aria-label="Primary navigation">
-        {nav.map((item) => {
-          const active =
-            pathname === item.href ||
-            (item.href !== '/dashboard' && pathname.startsWith(item.href))
-          return (
-            <Link className={`nav-item ${active ? 'active' : ''}`} href={item.href} key={item.href}>
-              {item.icon}
-              <span>{item.label}</span>
-            </Link>
-          )
-        })}
-      </nav>
+      <div className="shell-body">
+        <nav className="icon-rail" aria-label="Primary navigation">
+          {nav.map((item, index) => {
+            const active =
+              pathname === item.href ||
+              (item.href !== '/dashboard' && pathname.startsWith(item.href))
+            const isLast = index === nav.length - 1
+            return (
+              <Link
+                className={`nav-item ${active ? 'active' : ''}`}
+                href={item.href}
+                key={item.href}
+                style={isLast ? { marginTop: 'auto' } : undefined}
+                aria-label={item.label}
+              >
+                {item.icon}
+                <span className="nav-tooltip">{item.label}</span>
+              </Link>
+            )
+          })}
+        </nav>
 
-      <div className="main-area">
-        {children}
+        <div className="main-area">
+          {children}
+        </div>
       </div>
     </div>
   )
