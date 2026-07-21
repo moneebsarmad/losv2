@@ -8,10 +8,12 @@ export function MetricCard({
   helper?: string
 }) {
   return (
-    <div className="card metric">
-      <span className="metric-label">{label}</span>
+    <div className="metric-card">
+      <div className="metric-card-body">
+        <span className="metric-label">{label}</span>
+        {helper ? <span className="metric-helper">{helper}</span> : null}
+      </div>
       <span className="metric-value">{value}</span>
-      {helper ? <span className="muted">{helper}</span> : null}
     </div>
   )
 }

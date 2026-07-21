@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useMemo, useState } from 'react'
 import Link from 'next/link'
 import { Download, RefreshCw } from 'lucide-react'
 import { DistributionList } from '@/components/charts/DistributionList'
+import { RingGrid } from '@/components/charts/RingGrid'
 import { RecognitionFeed } from '@/components/recognition/RecognitionFeed'
 import { LoadingState } from '@/components/ui/LoadingState'
 import { MetricCard } from '@/components/ui/MetricCard'
@@ -187,17 +188,17 @@ export function AdminOverviewDashboard({ title = 'Tarbiyah overview' }: { title?
             <div className="card">
               <p className="eyebrow">Houses</p>
               <h2 style={{ marginTop: 6 }}>Recognition by house</h2>
-              <DistributionList rows={payload.byHouse} />
+              <RingGrid rows={payload.byHouse} useHouseColors />
             </div>
             <div className="card">
               <p className="eyebrow">3Rs</p>
               <h2 style={{ marginTop: 6 }}>Recognition by value</h2>
-              <DistributionList rows={payload.byR} />
+              <RingGrid rows={payload.byR} />
             </div>
             <div className="card">
               <p className="eyebrow">Domains</p>
               <h2 style={{ marginTop: 6 }}>Recognition by setting</h2>
-              <DistributionList rows={payload.byDomain} />
+              <RingGrid rows={payload.byDomain} color="var(--nav)" />
             </div>
             <div className="card">
               <p className="eyebrow">Staff</p>

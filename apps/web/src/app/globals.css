@@ -340,77 +340,147 @@ button {
 
 .app-shell {
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 280px minmax(0, 1fr);
-}
-
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  background: linear-gradient(180deg, #0c1a2e 0%, #091422 100%);
-  color: white;
-  padding: 22px;
   display: flex;
   flex-direction: column;
-  gap: 22px;
 }
 
-.sidebar .brand-lockup {
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+/* ── APP HEADER (top bar with brand + user) ─────────────────────────────── */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  height: 60px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #0c1a2e 0%, #13243d 100%);
+  border-bottom: 1px solid rgba(196, 145, 30, 0.18);
+  flex-shrink: 0;
 }
 
-.sidebar .brand-lockup strong {
+.app-header .brand-lockup {
+  gap: 10px;
+}
+
+.app-header .brand-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.app-header .brand-mark img {
+  width: 26px;
+  height: 26px;
+}
+
+.header-eyebrow {
+  color: rgba(196, 145, 30, 0.85) !important;
+  font-size: 10px !important;
+  letter-spacing: 0.14em !important;
+}
+
+.header-app-name {
+  font-family: var(--font-serif);
+  font-size: 16px;
+  font-weight: 700;
   color: white;
 }
 
-.nav-list {
-  display: grid;
-  gap: 4px;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.header-user {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+  color: white;
+  font-size: 13px;
+}
+
+.header-role {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.48);
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.btn-header-signout {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  min-height: 34px;
+  padding: 0 12px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  transition: background 0.14s ease, color 0.14s ease;
+}
+
+.btn-header-signout:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+}
+
+/* ── NAV STRIP (horizontal navigation) ─────────────────────────────────── */
+
+.nav-strip {
+  position: sticky;
+  top: 60px;
+  z-index: 19;
+  height: 46px;
+  padding: 0 16px;
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.nav-strip::-webkit-scrollbar {
+  display: none;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 11px;
-  border-radius: 10px;
-  padding: 11px 12px;
-  color: rgba(255, 255, 255, 0.58);
-  font-size: 13px;
+  gap: 7px;
+  padding: 0 14px;
+  height: 100%;
+  color: var(--muted);
+  font-size: 12px;
   font-weight: 600;
-  transition: background 0.14s ease, color 0.14s ease;
+  white-space: nowrap;
+  border-bottom: 2px solid transparent;
+  transition: color 0.14s ease, border-color 0.14s ease;
 }
 
 .nav-item:hover {
-  color: rgba(255, 255, 255, 0.88);
-  background: rgba(255, 255, 255, 0.07);
+  color: var(--ink);
 }
 
 .nav-item.active {
-  color: var(--gold-bright);
-  background: rgba(196, 145, 30, 0.14);
-  border-left: 3px solid var(--gold);
-  padding-left: 9px;
+  color: var(--gold-dark);
+  border-bottom-color: var(--gold);
 }
 
 .main-area {
+  flex: 1;
   min-width: 0;
-}
-
-.topbar {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  min-height: 72px;
-  padding: 14px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  border-bottom: 1px solid var(--line);
-  background: rgba(244, 234, 216, 0.90);
-  backdrop-filter: blur(14px);
+  min-height: 0;
 }
 
 /* ── PAGE LAYOUT ────────────────────────────────────────────────────────── */
@@ -477,27 +547,107 @@ button {
 
 /* ── METRICS ────────────────────────────────────────────────────────────── */
 
-.metric {
-  display: grid;
-  gap: 4px;
-  border-top: 2px solid var(--gold);
+.metric-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  box-shadow: inset 4px 0 0 var(--gold), var(--shadow);
+}
+
+.metric-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
 }
 
 .metric-label {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--gold-dark);
-  margin-top: 14px;
+  color: var(--muted);
+  margin: 0;
+}
+
+.metric-helper {
+  font-size: 11px;
+  color: var(--muted);
 }
 
 .metric-value {
   font-family: var(--font-serif);
-  font-size: 48px;
+  font-size: 38px;
   font-weight: 700;
   color: var(--nav);
   line-height: 1;
+  flex-shrink: 0;
+}
+
+/* ── RING INDICATORS ────────────────────────────────────────────────────── */
+
+.ring-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px 16px;
+  padding: 16px 4px 8px;
+  justify-content: space-around;
+}
+
+.ring-indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 72px;
+}
+
+.ring-donut {
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  background: conic-gradient(
+    var(--ring-fill, var(--gold)) 0% calc(var(--ring-pct, 0) * 1%),
+    rgba(180, 145, 40, 0.13) 0%
+  );
+  display: grid;
+  place-items: center;
+  position: relative;
+}
+
+.ring-donut::after {
+  content: '';
+  position: absolute;
+  inset: 13px;
+  background: var(--surface);
+  border-radius: 50%;
+}
+
+.ring-inner {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--nav);
+  line-height: 1;
+}
+
+.ring-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  text-align: center;
+  color: var(--muted);
+  letter-spacing: 0.03em;
+  max-width: 80px;
+  line-height: 1.3;
 }
 
 /* ── PILLS ──────────────────────────────────────────────────────────────── */
@@ -685,23 +835,9 @@ button {
   background: linear-gradient(90deg, var(--gold), var(--gold-bright));
 }
 
-/* ── SIDEBAR FOOTER TEXT ────────────────────────────────────────────────── */
-
-.sidebar-tagline {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 14px;
-  color: rgba(255, 255, 255, 0.38);
-  line-height: 1.5;
-}
-
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 
 @media (max-width: 900px) {
-  .app-shell {
-    grid-template-columns: 1fr;
-  }
-
   .auth-page {
     align-items: flex-start;
     overflow-y: auto;
@@ -737,11 +873,6 @@ button {
     padding: 28px 22px;
   }
 
-  .sidebar {
-    position: static;
-    height: auto;
-  }
-
   .grid-2,
   .grid-3,
   .grid-4,
@@ -750,7 +881,6 @@ button {
     grid-column: auto;
   }
 
-  .topbar,
   .page {
     padding-left: 18px;
     padding-right: 18px;
@@ -761,6 +891,14 @@ button {
   }
 
   .metric-value {
-    font-size: 38px;
+    font-size: 30px;
+  }
+
+  .app-header {
+    padding: 0 16px;
+  }
+
+  .header-user {
+    display: none;
   }
 }
