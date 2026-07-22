@@ -1,8 +1,9 @@
 import { createClient } from '@supabase/supabase-js'
 import { getSupabaseServiceRoleKey, getSupabaseUrl } from './env'
+import type { Database } from '@/types/database'
 
 export function createSupabaseAdminClient() {
-  return createClient(getSupabaseUrl(), getSupabaseServiceRoleKey(), {
+  return createClient<Database>(getSupabaseUrl(), getSupabaseServiceRoleKey(), {
     auth: {
       persistSession: false,
       autoRefreshToken: false,

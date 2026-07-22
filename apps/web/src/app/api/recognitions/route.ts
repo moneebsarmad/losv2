@@ -14,6 +14,7 @@ type Payload = {
 export async function POST(request: Request) {
   const context = await requireStaff()
   if (isAuthError(context)) return context.error
+  if (!context.schoolId) return jsonError('School profile is not configured.', 403)
 
   const payload = (await request.json().catch(() => ({}))) as Payload
   const studentId = String(payload.studentId ?? '').trim()
@@ -32,12 +33,13 @@ export async function POST(request: Request) {
     return jsonError('Valid visibility is required.')
   }
 
-  const [studentRes, rValueRes, domainRes, pointRes, profileRes] = await Promise.all([
-    context.admin.from('students').select('id, student_name, grade, section, house, is_active').eq('id', studentId).maybeSingle(),
+  const [studentRes, rValueRes, domainRes, pointRes, profileRes, schoolRes] = await Promise.all([
+    context.admin.from('students').select('id, student_name, grade, section, house, is_active').eq('school_id', context.schoolId).eq('id', studentId).maybeSingle(),
     context.admin.from('r_values').select('id').eq('id', rValueId).maybeSingle(),
     context.admin.from('domains').select('id').eq('id', domainId).eq('is_active', true).maybeSingle(),
     context.admin.from('point_values').select('value').eq('value', pointValue).eq('is_active', true).maybeSingle(),
-    context.admin.from('profiles').select('full_name, name, staff_name, email').eq('id', context.user.id).maybeSingle(),
+    context.admin.from('profiles').select('full_name, name, staff_name, email').eq('school_id', context.schoolId).eq('id', context.user.id).maybeSingle(),
+    context.admin.from('schools').select('timezone').eq('id', context.schoolId).maybeSingle(),
   ])
 
   if (!studentRes.data || studentRes.error || studentRes.data.is_active === false) return jsonError('Student not found.')
@@ -54,8 +56,15 @@ export async function POST(request: Request) {
       'Staff'
   ).trim()
   const { studentVisible, parentVisible } = visibilityBooleans(visibility)
+  const recognitionDate = new Intl.DateTimeFormat('en-CA', {
+    timeZone: schoolRes.data?.timezone ?? 'UTC',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  }).format(new Date())
 
   const insertPayload = {
+    school_id: context.schoolId,
     student_id: studentRes.data.id,
     staff_user_id: context.user.id,
     staff_name_snapshot: staffName,
@@ -72,12 +81,15 @@ export async function POST(request: Request) {
     parent_visible: parentVisible,
     admin_review_status: 'approved',
     source: 'manual',
+    recognition_date: recognitionDate,
+    record_status: 'active',
   }
 
   const { data, error } = await context.admin.from('recognition_logs').insert(insertPayload).select('id').single()
   if (error) return NextResponse.json({ error: error.message }, { status: 400 })
 
   await context.admin.from('audit_logs').insert({
+    school_id: context.schoolId,
     user_id: context.user.id,
     action: 'recognition.created',
     table_name: 'recognition_logs',

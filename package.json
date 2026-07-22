@@ -10,6 +10,11 @@
     "start": "npm run start --workspace apps/web",
     "lint": "npm run lint --workspace apps/web",
     "typecheck": "npm run typecheck --workspace apps/web",
+    "test": "npm run test --workspace apps/web",
+    "test:db": "node scripts/run-supabase-tests.mjs",
     "db:bootstrap": "node scripts/bootstrap-supabase.mjs"
+  },
+  "devDependencies": {
+    "postgres": "^3.4.9"
   }
 }

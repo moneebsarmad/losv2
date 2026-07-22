@@ -7,8 +7,8 @@ export async function GET() {
   if (isAuthError(context)) return context.error
 
   const [recognitions, houseEvents] = await Promise.all([
-    context.admin.from('recognition_logs').select('house_snapshot, point_value, r_values(name), domains(name)').limit(10000),
-    context.admin.from('house_events').select('house, point_value').limit(10000),
+    context.admin.from('recognition_logs').select('house_snapshot, point_value, r_values(name), domains(name)').eq('school_id', context.schoolId!).eq('record_status', 'active').is('deleted_at', null).limit(10000),
+    context.admin.from('house_events').select('house, point_value').eq('school_id', context.schoolId!).limit(10000),
   ])
 
   if (recognitions.error) return NextResponse.json({ error: recognitions.error.message }, { status: 400 })

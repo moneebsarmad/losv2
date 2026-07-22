@@ -30,6 +30,9 @@ export async function GET(request: NextRequest) {
   let query = context.admin
     .from('recognition_logs')
     .select('*, r_values(id,key,name), domains(id,key,name)')
+    .eq('school_id', context.schoolId!)
+    .eq('record_status', 'active')
+    .is('deleted_at', null)
     .order('created_at', { ascending: false })
     .limit(5000)
 

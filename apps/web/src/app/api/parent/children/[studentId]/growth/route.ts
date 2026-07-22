@@ -11,6 +11,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ stu
   const link = await context.admin
     .from('parent_student_links')
     .select('student_id')
+    .eq('school_id', context.schoolId!)
     .eq('parent_user_id', context.user.id)
     .eq('student_id', studentId)
     .maybeSingle()
@@ -23,13 +24,17 @@ export async function GET(_request: Request, { params }: { params: Promise<{ stu
     context.admin
       .from('students')
       .select('id, student_id, student_name, grade, section, house')
+      .eq('school_id', context.schoolId!)
       .eq('id', studentId)
       .maybeSingle(),
     context.admin
       .from('recognition_logs')
       .select('*, r_values(id,key,name), domains(id,key,name)')
+      .eq('school_id', context.schoolId!)
       .eq('student_id', studentId)
       .eq('parent_visible', true)
+      .eq('record_status', 'active')
+      .is('deleted_at', null)
       .in('admin_review_status', ['approved', 'not_required'])
       .order('created_at', { ascending: false }),
   ])

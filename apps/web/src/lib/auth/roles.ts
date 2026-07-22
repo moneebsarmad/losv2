@@ -1,4 +1,4 @@
-import type { AppRole, PortalRole } from '@/types'
+import type { AppRole, PortalRole } from '../../types'
 
 export const ADMIN_ROLES: AppRole[] = ['super_admin', 'admin', 'tarbiyah_leadership']
 export const STAFF_ROLES: AppRole[] = [

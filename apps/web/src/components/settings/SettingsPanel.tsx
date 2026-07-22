@@ -21,12 +21,13 @@ export function SettingsPanel() {
 
   useEffect(() => {
     if (!user?.id) return
+    const userId = user.id
 
     async function loadProfile() {
       const { data } = await supabase
         .from('profiles')
         .select('role, full_name, name, staff_name, student_name, email')
-        .eq('id', user?.id)
+        .eq('id', userId)
         .maybeSingle()
       setProfile(data)
     }

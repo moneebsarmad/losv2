@@ -20,9 +20,10 @@ export default function DashboardPage() {
 
   useEffect(() => {
     if (!user?.id) return
+    const userId = user.id
 
     async function loadRole() {
-      const { data } = await supabase.from('profiles').select('role').eq('id', user?.id).maybeSingle()
+      const { data } = await supabase.from('profiles').select('role').eq('id', userId).maybeSingle()
       setRole(toPortalRole(String(data?.role ?? '')))
       setLoading(false)
     }
