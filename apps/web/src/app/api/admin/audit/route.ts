@@ -8,6 +8,7 @@ export async function GET() {
   const { data, error } = await context.admin
     .from('audit_logs')
     .select('id, user_id, action, table_name, record_id, created_at')
+    .eq('school_id', context.schoolId!)
     .order('created_at', { ascending: false })
     .limit(100)
 

@@ -4,6 +4,8 @@ import { spawnSync } from 'child_process'
 import { createClient } from '@supabase/supabase-js'
 import WebSocket from 'ws'
 
+const BHA_SCHOOL_ID = '00000000-0000-0000-0000-000000000001'
+
 function parseEnv(filePath) {
   const text = fs.readFileSync(filePath, 'utf8')
   return Object.fromEntries(
@@ -127,6 +129,7 @@ for (const user of users) {
 for (const [index, user] of created.entries()) {
   const { error } = await admin.from('profiles').upsert({
     id: user.id,
+    school_id: BHA_SCHOOL_ID,
     role: user.role,
     email: user.email,
     ...user.profile,
@@ -173,6 +176,7 @@ for (const row of roster) {
   const { data: existingStudent, error: lookupError } = await admin
     .from('students')
     .select('id, student_name')
+    .eq('school_id', BHA_SCHOOL_ID)
     .eq('student_name', row.student_name)
     .maybeSingle()
   if (lookupError) throw lookupError
@@ -183,6 +187,7 @@ for (const row of roster) {
       const { data, error } = await admin
         .from('students')
         .insert({
+          school_id: BHA_SCHOOL_ID,
           student_name: row.student_name,
           grade: row.grade,
           section: row.section,
@@ -197,8 +202,18 @@ for (const row of roster) {
 
   insertedStudents.push(studentRecord)
 
+  const { error: enrolmentError } = await admin.from('student_enrolments').upsert({
+    school_id: BHA_SCHOOL_ID,
+    student_id: studentRecord.id,
+    starts_on: '2026-01-01',
+    status: 'active',
+    dates_inferred: true,
+  }, { onConflict: 'school_id,student_id,starts_on' })
+  if (enrolmentError) throw enrolmentError
+
   if (row.user_id) {
     const { error: linkError } = await admin.from('student_user_links').upsert({
+      school_id: BHA_SCHOOL_ID,
       user_id: row.user_id,
       student_id: studentRecord.id,
     })
@@ -211,12 +226,14 @@ const childLookup = Object.fromEntries(insertedStudents.map((row) => [row.studen
 if (parent) {
   const { error } = await admin.from('parent_student_links').upsert([
     {
+      school_id: BHA_SCHOOL_ID,
       parent_user_id: parent.id,
       student_id: childLookup['Amina Ali'].id,
       relationship: 'Mother',
       is_primary: true,
     },
     {
+      school_id: BHA_SCHOOL_ID,
       parent_user_id: parent.id,
       student_id: childLookup['Faris Ahmed'].id,
       relationship: 'Mother',
@@ -288,6 +305,7 @@ for (const seed of recognitionSeed) {
   const { data: existingRecognition, error: existingError } = await admin
     .from('recognition_logs')
     .select('id')
+    .eq('school_id', BHA_SCHOOL_ID)
     .eq('student_name_snapshot', seed.student_name)
     .eq('staff_name_snapshot', seed.staff_name)
     .eq('behaviour_note', seed.note)
@@ -298,6 +316,7 @@ for (const seed of recognitionSeed) {
 
   const rosterRow = roster.find((row) => row.student_name === seed.student_name)
   const { error } = await admin.from('recognition_logs').insert({
+    school_id: BHA_SCHOOL_ID,
     student_id: student.id,
     staff_user_id: staffUser.id,
     staff_name_snapshot: seed.staff_name,
@@ -314,6 +333,8 @@ for (const seed of recognitionSeed) {
     parent_visible: seed.visibility === 'parent' || seed.visibility === 'student_parent',
     admin_review_status: 'approved',
     source: 'bootstrap',
+    recognition_date: new Date().toISOString().slice(0, 10),
+    record_status: 'active',
   })
   if (error) throw error
 }

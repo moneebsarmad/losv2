@@ -10,6 +10,7 @@ export type AuthContext = {
   admin: ReturnType<typeof createSupabaseAdminClient>
   user: User
   role: string | null
+  schoolId: string | null
 }
 
 export async function getAuthContext(): Promise<AuthContext | { error: NextResponse }> {
@@ -22,10 +23,19 @@ export async function getAuthContext(): Promise<AuthContext | { error: NextRespo
     return { error: NextResponse.json({ error: 'Unauthorized.' }, { status: 401 }) }
   }
 
-  const { data: role } = await supabase.rpc('get_user_role', { user_id: user.id })
+  const [{ data: role }, { data: schoolId }] = await Promise.all([
+    supabase.rpc('get_current_user_role'),
+    supabase.rpc('current_user_school_id'),
+  ])
   const admin = createSupabaseAdminClient()
 
-  return { supabase, admin, user, role: typeof role === 'string' ? role : null }
+  return {
+    supabase,
+    admin,
+    user,
+    role: typeof role === 'string' ? role : null,
+    schoolId: typeof schoolId === 'string' ? schoolId : null,
+  }
 }
 
 export function isAuthError(context: AuthContext | { error: NextResponse }): context is { error: NextResponse } {
@@ -51,11 +61,19 @@ export async function requireStaff() {
 }
 
 export async function hasPermission(context: AuthContext, permission: string) {
-  const { data } = await context.supabase.rpc('has_permission', {
-    user_id: context.user.id,
-    perm: permission,
+  const { data } = await context.supabase.rpc('current_user_has_permission', {
+    permission_to_check: permission,
   })
   return data === true
+}
+
+export async function requireHonoursPermission(permission = 'honours.view') {
+  const context = await getAuthContext()
+  if (isAuthError(context)) return context
+  if (!context.schoolId || !(await hasPermission(context, permission))) {
+    return { error: NextResponse.json({ error: 'Forbidden.' }, { status: 403 }) }
+  }
+  return context
 }
 
 export function jsonError(message: string, status = 400) {

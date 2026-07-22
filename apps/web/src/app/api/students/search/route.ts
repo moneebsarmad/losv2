@@ -11,6 +11,7 @@ export async function GET(request: NextRequest) {
   const { data, error } = await context.admin
     .from('students')
     .select('id, student_id, student_name, grade, section, house')
+    .eq('school_id', context.schoolId!)
     .eq('is_active', true)
     .ilike('student_name', `%${query}%`)
     .order('student_name')

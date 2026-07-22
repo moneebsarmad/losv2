@@ -4,6 +4,7 @@ import type { ReactNode } from 'react'
 import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import {
+  Award,
   BarChart3,
   ClipboardPlus,
   FileClock,
@@ -17,6 +18,7 @@ import {
 } from 'lucide-react'
 import { useAuth } from '@/app/providers'
 import { APP_NAME, SCHOOL_CREST, SCHOOL_NAME } from '@/lib/constants/formation'
+import { navigationByRole, type NavigationIcon } from '@/lib/auth/navigation'
 import type { PortalRole } from '@/types'
 
 type AppShellProps = {
@@ -25,41 +27,24 @@ type AppShellProps = {
   children: ReactNode
 }
 
-const navByRole: Record<PortalRole, Array<{ label: string; href: string; icon: ReactNode }>> = {
-  staff: [
-    { label: 'Dashboard', href: '/dashboard', icon: <Home size={18} /> },
-    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
-    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
-  ],
-  student: [
-    { label: 'My Growth', href: '/dashboard/my-growth', icon: <UserRound size={18} /> },
-    { label: 'My House', href: '/dashboard/my-house', icon: <Trophy size={18} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <BarChart3 size={18} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
-  ],
-  parent: [
-    { label: 'Child View', href: '/dashboard/parent', icon: <UserRound size={18} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
-  ],
-  admin: [
-    { label: 'Tarbiyah', href: '/dashboard', icon: <ShieldCheck size={18} /> },
-    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
-    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
-    { label: 'Reports', href: '/dashboard/admin/reports', icon: <BarChart3 size={18} /> },
-    { label: 'Audit', href: '/dashboard/admin/audit', icon: <FileClock size={18} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
-  ],
+const navigationIcons: Record<NavigationIcon, ReactNode> = {
+  home: <Home size={18} />,
+  recognise: <ClipboardPlus size={18} />,
+  students: <UsersRound size={18} />,
+  houses: <Trophy size={18} />,
+  settings: <Settings size={18} />,
+  growth: <UserRound size={18} />,
+  analytics: <BarChart3 size={18} />,
+  admin: <ShieldCheck size={18} />,
+  honours: <Award size={18} />,
+  audit: <FileClock size={18} />,
 }
 
 export function AppShell({ role, userName, children }: AppShellProps) {
   const pathname = usePathname()
   const router = useRouter()
   const { signOut } = useAuth()
-  const nav = navByRole[role]
+  const nav = navigationByRole[role]
 
   async function handleSignOut() {
     await signOut()
@@ -106,7 +91,7 @@ export function AppShell({ role, userName, children }: AppShellProps) {
                 style={isLast ? { marginTop: 'auto' } : undefined}
                 aria-label={item.label}
               >
-                {item.icon}
+                {navigationIcons[item.icon]}
                 <span className="nav-tooltip">{item.label}</span>
               </Link>
             )

@@ -25,13 +25,14 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     if (!user?.id) return
+    const userId = user.id
 
     async function loadProfile() {
       setProfileLoading(true)
       const { data } = await supabase
         .from('profiles')
         .select('role, full_name, name, staff_name, student_name, email')
-        .eq('id', user?.id)
+        .eq('id', userId)
         .maybeSingle()
 
       const nextRole = toPortalRole(String(data?.role ?? ''))

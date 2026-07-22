@@ -7,6 +7,7 @@ async function resolveStudent(context: AuthContext) {
   const link = await context.admin
     .from('student_user_links')
     .select('student_id')
+    .eq('school_id', context.schoolId!)
     .eq('user_id', context.user.id)
     .limit(1)
     .maybeSingle()
@@ -15,6 +16,7 @@ async function resolveStudent(context: AuthContext) {
     return context.admin
       .from('students')
       .select('id, student_id, student_name, grade, section, house')
+      .eq('school_id', context.schoolId!)
       .eq('id', link.data.student_id)
       .maybeSingle()
   }
@@ -22,6 +24,7 @@ async function resolveStudent(context: AuthContext) {
   const profile = await context.admin
     .from('profiles')
     .select('student_name, full_name, name')
+    .eq('school_id', context.schoolId!)
     .eq('id', context.user.id)
     .maybeSingle()
   const name = String(profile.data?.student_name ?? profile.data?.full_name ?? profile.data?.name ?? '').trim()
@@ -30,6 +33,7 @@ async function resolveStudent(context: AuthContext) {
   return context.admin
     .from('students')
     .select('id, student_id, student_name, grade, section, house')
+    .eq('school_id', context.schoolId!)
     .ilike('student_name', name)
     .limit(1)
     .maybeSingle()
@@ -47,8 +51,11 @@ export async function GET() {
   const { data, error } = await context.admin
     .from('recognition_logs')
     .select('*, r_values(id,key,name), domains(id,key,name)')
+    .eq('school_id', context.schoolId!)
     .eq('student_id', student.id)
     .eq('student_visible', true)
+    .eq('record_status', 'active')
+    .is('deleted_at', null)
     .in('admin_review_status', ['approved', 'not_required'])
     .order('created_at', { ascending: false })
 

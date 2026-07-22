@@ -8,6 +8,7 @@ export async function GET() {
   const links = await context.admin
     .from('parent_student_links')
     .select('student_id, relationship, is_primary')
+    .eq('school_id', context.schoolId!)
     .eq('parent_user_id', context.user.id)
 
   if (links.error) return NextResponse.json({ error: links.error.message }, { status: 400 })
@@ -17,6 +18,7 @@ export async function GET() {
   const students = await context.admin
     .from('students')
     .select('id, student_id, student_name, grade, section, house')
+    .eq('school_id', context.schoolId!)
     .in('id', ids)
     .order('student_name')
 

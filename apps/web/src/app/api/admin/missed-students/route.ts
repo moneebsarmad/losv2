@@ -8,13 +8,18 @@ export async function GET(request: NextRequest) {
   const start = request.nextUrl.searchParams.get('start')
   const end = request.nextUrl.searchParams.get('end')
 
-  let recognitionQuery = context.admin.from('recognition_logs').select('student_id')
+  let recognitionQuery = context.admin
+    .from('recognition_logs')
+    .select('student_id')
+    .eq('school_id', context.schoolId!)
+    .eq('record_status', 'active')
+    .is('deleted_at', null)
   if (start) recognitionQuery = recognitionQuery.gte('created_at', `${start}T00:00:00.000Z`)
   if (end) recognitionQuery = recognitionQuery.lte('created_at', `${end}T23:59:59.999Z`)
 
   const [recognized, students] = await Promise.all([
     recognitionQuery,
-    context.admin.from('students').select('id, student_id, student_name, grade, section, house').eq('is_active', true),
+    context.admin.from('students').select('id, student_id, student_name, grade, section, house').eq('school_id', context.schoolId!).eq('is_active', true),
   ])
 
   if (recognized.error) return NextResponse.json({ error: recognized.error.message }, { status: 400 })

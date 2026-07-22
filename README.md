@@ -47,6 +47,7 @@ NEXT_DB_PASSWORD=
 Run checks:
 
 ```bash
+npm test
 npm run typecheck
 npm run build
 ```
@@ -73,6 +74,12 @@ npm run dev
 - CSV export route
 - Audit trail route/page
 - Supabase schema, RLS, role/permission seed, 3R/domain/point-value seed
+- Admin-only Quarterly Star Honours scoring, review, finalisation and notifications
+
+## Quarterly Star Honours
+
+- [Architecture and formula versioning](docs/quarterly-star-honours-architecture.md)
+- [Administrator guide](docs/quarterly-star-honours-admin-guide.md)
 
 ## Database Deployment Note
 
