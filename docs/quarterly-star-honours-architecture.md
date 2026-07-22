@@ -123,9 +123,9 @@ The migrations add school/date and school/student/date indexes to recognition da
 
 ## Scheduling And Notifications
 
-`vercel.json` invokes the maintenance route every six hours. The job performs a nightly refresh during active periods, refreshes at most every six hours in the final 14 days, and creates the period-end frozen run. It transitions period state and inserts deduplicated in-app notifications at 14 days, 7 days, one day after the end, and three days after the end when decisions remain. Score-run failures create an admin-only diagnostic notification.
+`vercel.json` invokes the maintenance route nightly at 07:00 UTC, which is compatible with the project's current Vercel plan. The endpoint is idempotent and retains a five-hour refresh guard during the final 14 days, so a Vercel Pro or external scheduler can call the same route every six hours without code changes. Each run transitions period state, creates the period-end frozen snapshot, and inserts deduplicated in-app notifications at 14 days, 7 days, one day after the end, and three days after the end when decisions remain. Score-run failures create an admin-only diagnostic notification.
 
-Set `CRON_SECRET` in each deployed environment. Vercel sends it as the bearer token. The notification table and dispatcher can support a future email or push adapter without changing candidate privacy.
+Set `CRON_SECRET` in each deployed environment. Vercel sends it as the bearer token. To adopt the recommended six-hour final-window cadence, change the Vercel schedule to `0 */6 * * *` on a plan that supports sub-daily cron jobs, or invoke the endpoint from the existing trusted scheduler with the same bearer secret. The notification table and dispatcher can support a future email or push adapter without changing candidate privacy.
 
 ## Algorithm Versioning
 
