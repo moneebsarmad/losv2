@@ -1923,6 +1923,13 @@ button {
 
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 
+@media (min-width: 1280px) and (min-aspect-ratio: 5 / 4) {
+  .auth-page {
+    justify-content: flex-end;
+    padding-right: clamp(0px, calc(100vw - 1280px), 48px);
+  }
+}
+
 @media (max-width: 900px) {
   .auth-page {
     align-items: flex-start;
