@@ -69,12 +69,9 @@ button {
 
 .auth-page::before {
   position: absolute;
-  inset: -4px;
+  inset: 0;
   content: '';
   background: url("/images/brighter-horizons-campus-upscaled.jpg") center / cover no-repeat;
-  filter: blur(2px) saturate(0.78) contrast(1.04);
-  -webkit-filter: blur(2px) saturate(0.78) contrast(1.04);
-  opacity: 0.4;
 }
 
 .auth-glass-panel {
@@ -83,27 +80,27 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 28px;
   width: 100%;
   max-width: 480px;
   padding: 24px 20px;
 }
 
 .auth-brand {
-  position: absolute;
-  z-index: 1;
-  top: clamp(36px, 4vw, 64px);
-  left: clamp(36px, 4vw, 64px);
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 18px;
+  gap: 16px;
+  width: 100%;
+  max-width: 440px;
   margin: 0;
   text-align: left;
 }
 
 .auth-crest {
-  width: clamp(112px, 8vw, 144px);
-  height: clamp(112px, 8vw, 144px);
+  flex: 0 0 auto;
+  width: 84px;
+  height: 84px;
   display: grid;
   place-items: center;
   filter: drop-shadow(0 10px 36px rgba(5, 12, 24, 0.32));
@@ -118,13 +115,14 @@ button {
 .auth-brand-copy {
   display: grid;
   gap: 6px;
+  min-width: 0;
 }
 
 .eyebrow.auth-eyebrow {
   color: #ffffff;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 900;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.13em;
   text-shadow:
     0 1px 2px rgba(5, 12, 24, 1),
     0 3px 18px rgba(5, 12, 24, 0.9);
@@ -887,12 +885,13 @@ button {
   }
 
   .auth-page::before {
-    inset: -4px clamp(400px, 36vw, 680px) -4px -4px;
+    inset: 0 clamp(400px, 36vw, 680px) 0 0;
   }
 
   .auth-glass-panel {
     grid-column: 2;
     justify-content: center;
+    gap: 44px;
     min-height: 100vh;
     max-width: none;
     border-left: 1px solid rgba(215, 182, 95, 0.28);
@@ -911,22 +910,29 @@ button {
     padding: 0;
     box-shadow: none;
   }
+
+  .auth-crest {
+    filter: drop-shadow(0 8px 24px rgba(0, 0, 0, 0.28));
+  }
+
+  .eyebrow.auth-eyebrow,
+  .auth-title {
+    text-shadow: none;
+  }
 }
 
 @media (max-width: 900px) {
   .auth-page {
     align-items: flex-start;
     overflow-y: auto;
-    padding-top: 124px;
   }
 
   .auth-glass-panel {
-    padding: 24px 16px 40px;
+    gap: 20px;
+    padding: 20px 16px 40px;
   }
 
   .auth-brand {
-    top: 20px;
-    left: 20px;
     gap: 12px;
   }
 

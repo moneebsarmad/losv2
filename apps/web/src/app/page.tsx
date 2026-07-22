@@ -27,17 +27,17 @@ export default function LoginPage() {
 
   return (
     <main className="auth-page">
-      <div className="auth-brand">
-        <div className="auth-crest">
-          <img src={SCHOOL_CREST} alt={SCHOOL_NAME} />
-        </div>
-        <div className="auth-brand-copy">
-          <p className="eyebrow auth-eyebrow">{SCHOOL_NAME}</p>
-          <strong className="auth-title">{APP_NAME}</strong>
-        </div>
-      </div>
-
       <div className="auth-glass-panel">
+        <div className="auth-brand">
+          <div className="auth-crest">
+            <img src={SCHOOL_CREST} alt={SCHOOL_NAME} />
+          </div>
+          <div className="auth-brand-copy">
+            <p className="eyebrow auth-eyebrow">{SCHOOL_NAME}</p>
+            <strong className="auth-title">{APP_NAME}</strong>
+          </div>
+        </div>
+
         <form className="auth-card" onSubmit={handleSubmit}>
           <h2>Welcome back</h2>
           <p className="auth-subtitle">Sign in to continue to League of Stars.</p>
