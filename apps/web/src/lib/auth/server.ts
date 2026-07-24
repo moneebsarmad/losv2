@@ -22,7 +22,15 @@ export async function getAuthContext(): Promise<AuthContext | { error: NextRespo
     return { error: NextResponse.json({ error: 'Unauthorized.' }, { status: 401 }) }
   }
 
-  const { data: role } = await supabase.rpc('get_user_role', { user_id: user.id })
+  const { data: role, error: roleError } = await supabase.rpc('get_current_user_role')
+  if (roleError) {
+    return {
+      error: NextResponse.json(
+        { error: 'Unable to resolve user authorization.' },
+        { status: 500 }
+      ),
+    }
+  }
   const admin = createSupabaseAdminClient()
 
   return { supabase, admin, user, role: typeof role === 'string' ? role : null }
@@ -51,9 +59,8 @@ export async function requireStaff() {
 }
 
 export async function hasPermission(context: AuthContext, permission: string) {
-  const { data } = await context.supabase.rpc('has_permission', {
-    user_id: context.user.id,
-    perm: permission,
+  const { data } = await context.supabase.rpc('current_user_has_permission', {
+    permission_to_check: permission,
   })
   return data === true
 }
