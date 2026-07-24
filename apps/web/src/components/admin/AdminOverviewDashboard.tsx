@@ -123,7 +123,7 @@ export function AdminOverviewDashboard({
     let refreshTimer: ReturnType<typeof setTimeout> | null = null
 
     function queueRefresh(delay = REALTIME_REFRESH_DEBOUNCE_MS) {
-      if (document.visibilityState !== 'visible') return
+      if (document.visibilityState !== 'visible' || !navigator.onLine) return
       if (refreshTimer) clearTimeout(refreshTimer)
       refreshTimer = setTimeout(() => {
         refreshTimer = null
@@ -144,13 +144,16 @@ export function AdminOverviewDashboard({
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'visible') queueRefresh(0)
     }
+    const handleOnline = () => queueRefresh(0)
 
     document.addEventListener('visibilitychange', handleVisibilityChange)
+    window.addEventListener('online', handleOnline)
 
     return () => {
       if (refreshTimer) clearTimeout(refreshTimer)
       window.clearInterval(interval)
       document.removeEventListener('visibilitychange', handleVisibilityChange)
+      window.removeEventListener('online', handleOnline)
       void supabase.removeChannel(channel)
     }
   }, [loadOverview])
