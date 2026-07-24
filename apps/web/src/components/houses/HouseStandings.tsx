@@ -77,7 +77,7 @@ export function HouseStandings({ title = 'House standings' }: { title?: string }
                   <div className="toolbar" style={{ justifyContent: 'space-between' }}>
                     <strong>
                       {HOUSE_LOGOS[house.name] ? <img className="house-logo" src={HOUSE_LOGOS[house.name]} alt="" /> : null}
-                      <span className="house-dot" style={{ background: HOUSE_COLORS[house.name] ?? '#ba8f22' }} />
+                      <span className="house-dot" style={{ background: HOUSE_COLORS[house.name] ?? '#8a6d2f' }} />
                       {house.name}
                     </strong>
                     <span className="muted">{house.value.toLocaleString()} points</span>

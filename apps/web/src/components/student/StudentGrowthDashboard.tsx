@@ -127,7 +127,7 @@ export function StudentGrowthDashboard() {
         </div>
         <div className="card">
           <div className="toolbar" style={{ marginBottom: 12 }}>
-            <Goal size={20} color="#ba8f22" />
+            <Goal size={20} color="#8a6d2f" />
             <h2 style={{ margin: 0 }}>This week I want to grow in</h2>
           </div>
           <div className="segmented">

@@ -83,7 +83,7 @@ export function StaffDashboard() {
               <p className="eyebrow">House Engine</p>
               <h2 style={{ margin: '6px 0 0' }}>My house impact</h2>
             </div>
-            <Trophy size={22} color="#ba8f22" />
+            <Trophy size={22} color="#8a6d2f" />
           </div>
           <DistributionList rows={payload.houseImpact} empty="Your recognitions will add to house energy here." />
         </div>
