@@ -15,9 +15,12 @@ export function RecognitionFeed({ recognitions }: { recognitions: RecognitionLog
             <div className="muted">
               {recognition.r_values?.name ?? '3R'} · {recognition.domains?.name ?? 'Domain'} · {formatDate(recognition.created_at)}
             </div>
-            <p style={{ marginBottom: 0 }}>{recognition.behaviour_note}</p>
+            <p style={{ marginBottom: 0 }}>
+              <strong>{recognition.behaviour_label_snapshot ?? 'Recognition'}</strong>
+              {recognition.behaviour_note ? ` — ${recognition.behaviour_note}` : ''}
+            </p>
           </div>
-          <span className="pill">+{recognition.point_value}</span>
+          <span className="pill">+{recognition.points_snapshot ?? recognition.point_value}</span>
         </div>
       ))}
     </div>

@@ -8,11 +8,11 @@ export const R_VALUES = [
 ] as const
 
 export const BHA_DOMAINS = [
-  { key: 'washrooms', name: 'Washrooms' },
-  { key: 'hallways_transition', name: 'Hallways and Transition' },
-  { key: 'prayer_space', name: 'Prayer Space' },
-  { key: 'classrooms', name: 'Classrooms' },
-  { key: 'lunch_recess', name: 'Lunch/Recess' },
+  { key: 'prayer_space', name: 'Prayer Space (Muṣallā)' },
+  { key: 'hallways_transitions', name: 'Hallways & Transitions' },
+  { key: 'classroom_learning', name: 'Classroom & Learning' },
+  { key: 'lunch_recess', name: 'Lunch / Recess' },
+  { key: 'bathrooms', name: 'Bathrooms' },
 ] as const
 
 export const POINT_VALUES = [

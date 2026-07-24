@@ -12,9 +12,21 @@ describe('Quarterly Star Honours navigation RBAC', () => {
 
   it('maps only the three authorised database roles to the admin portal', () => {
     expect(ADMIN_ROLES).toEqual(['super_admin', 'admin', 'tarbiyah_leadership'])
-    ADMIN_ROLES.forEach((role) => expect(toPortalRole(role)).toBe('admin'))
-    ;['house_mentor', 'teacher', 'support_staff', 'staff'].forEach((role) => {
-      expect(STAFF_ROLES).toContain(role)
+    // Super admins retain their distinct portal so the shell can expose
+    // super-admin-only controls; the other two governance roles use admin.
+    expect(toPortalRole('super_admin')).toBe('super_admin')
+    ;(['admin', 'tarbiyah_leadership'] as const).forEach((role) => expect(toPortalRole(role)).toBe('admin'))
+    expect(STAFF_ROLES).toEqual([
+      'super_admin',
+      'admin',
+      'tarbiyah_leadership',
+      'house_mentor',
+      'teacher',
+      'support_staff',
+      'staff',
+    ])
+    expect(toPortalRole('house_mentor')).toBe('house_mentor')
+    ;(['teacher', 'support_staff', 'staff'] as const).forEach((role) => {
       expect(toPortalRole(role)).toBe('staff')
     })
     expect(toPortalRole('student')).toBe('student')

@@ -35,6 +35,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ stu
       .eq('parent_visible', true)
       .eq('record_status', 'active')
       .is('deleted_at', null)
+      .eq('award_status', 'approved')
       .in('admin_review_status', ['approved', 'not_required'])
       .order('created_at', { ascending: false }),
   ])

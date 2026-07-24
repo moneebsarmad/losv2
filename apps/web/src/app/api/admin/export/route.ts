@@ -13,10 +13,12 @@ export async function GET(request: NextRequest) {
   const end = request.nextUrl.searchParams.get('end')
   let query = context.admin
     .from('recognition_logs')
-    .select('created_at, student_name_snapshot, grade_snapshot, section_snapshot, house_snapshot, staff_name_snapshot, point_value, behaviour_note, visibility, r_values(name), domains(name)')
+    .select('created_at, observed_at, student_name_snapshot, grade_snapshot, section_snapshot, house_snapshot, staff_name_snapshot, point_value, points_snapshot, behaviour_label_snapshot, behaviour_note, graduate_values_snapshot, framework_version, award_mode_snapshot, visibility, r_values(name), domains(name)')
     .eq('school_id', context.schoolId!)
     .eq('record_status', 'active')
     .is('deleted_at', null)
+    .eq('award_status', 'approved')
+    .in('admin_review_status', ['approved', 'not_required'])
     .order('created_at', { ascending: false })
     .limit(10000)
 
@@ -34,8 +36,12 @@ export async function GET(request: NextRequest) {
     'House',
     'Staff',
     '3R',
+    'Behaviour',
+    'Graduate Values',
     'Domain',
     'Points',
+    'Mode',
+    'Framework',
     'Visibility',
     'Note',
   ]
@@ -47,8 +53,14 @@ export async function GET(request: NextRequest) {
     row.house_snapshot,
     row.staff_name_snapshot,
     row.r_values?.name,
+    row.behaviour_label_snapshot ?? 'Legacy recognition',
+    Array.isArray(row.graduate_values_snapshot)
+      ? row.graduate_values_snapshot.map((value: any) => value.label).join('; ')
+      : '',
     row.domains?.name,
-    row.point_value,
+    row.points_snapshot ?? row.point_value,
+    row.award_mode_snapshot ?? 'direct',
+    row.framework_version ?? 'legacy',
     row.visibility,
     row.behaviour_note,
   ])

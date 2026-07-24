@@ -14,6 +14,8 @@ export async function GET(request: NextRequest) {
     .eq('school_id', context.schoolId!)
     .eq('record_status', 'active')
     .is('deleted_at', null)
+    .eq('award_status', 'approved')
+    .in('admin_review_status', ['approved', 'not_required'])
   if (start) recognitionQuery = recognitionQuery.gte('created_at', `${start}T00:00:00.000Z`)
   if (end) recognitionQuery = recognitionQuery.lte('created_at', `${end}T23:59:59.999Z`)
 

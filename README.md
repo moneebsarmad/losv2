@@ -50,6 +50,8 @@ Run checks:
 npm test
 npm run typecheck
 npm run build
+psql postgresql://postgres:postgres@127.0.0.1:54322/postgres -v ON_ERROR_STOP=1 -f supabase/tests/recognition_framework_v2_definitions.test.sql
+psql postgresql://postgres:postgres@127.0.0.1:54322/postgres -v ON_ERROR_STOP=1 -f supabase/tests/recognition_framework_v2_workflow.test.sql
 ```
 
 Start development:
@@ -75,6 +77,16 @@ npm run dev
 - Audit trail route/page
 - Supabase schema, RLS, role/permission seed, 3R/domain/point-value seed
 - Admin-only Quarterly Star Honours scoring, review, finalisation and notifications
+- Fixed-point Recognition Framework v2 with universal behaviours and five contextual domains
+- Exceptional `+50` nomination and approval workflow
+- Recognition governance analytics and audited reversals
+
+## Recognition Framework v2
+
+- [Architecture, security, migration, and framework versioning](docs/recognition-framework-v2-architecture.md)
+- [Staff recognition guide](docs/recognition-framework-v2-staff-guide.md)
+
+Staff select the behaviour they saw and the domain where it occurred. The system assigns the points. The same behaviour has the same value in every domain.
 
 ## Quarterly Star Honours
 

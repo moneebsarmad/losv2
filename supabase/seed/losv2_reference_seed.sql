@@ -9,11 +9,11 @@ on conflict (key) do update set
   sort_order = excluded.sort_order;
 
 insert into public.domains (key, name, description, locked, is_active, sort_order) values
-  ('washrooms', 'Washrooms', 'Adab, privacy, cleanliness, and safe use of washroom spaces', true, true, 1),
-  ('hallways_transition', 'Hallways and Transition', 'Movement, line culture, quiet voices, and safe transitions', true, true, 2),
-  ('prayer_space', 'Prayer Space', 'Salah adab, wudu readiness, stillness, and sacred space respect', true, true, 3),
-  ('classrooms', 'Classrooms', 'Learning behaviours, responsibility, participation, and peer respect', true, true, 4),
-  ('lunch_recess', 'Lunch/Recess', 'Inclusion, conflict resolution, play, and care for shared spaces', true, true, 5)
+  ('prayer_space', 'Prayer Space (Muṣallā)', 'Worship, readiness, focus, and care for the sacred space', true, true, 1),
+  ('hallways_transitions', 'Hallways & Transitions', 'Safe, purposeful, and respectful movement between settings', true, true, 2),
+  ('classroom_learning', 'Classroom & Learning', 'Learning, effort, honesty, participation, and care for the classroom', true, true, 3),
+  ('lunch_recess', 'Lunch / Recess', 'Inclusion, play, conflict repair, and care for shared spaces', true, true, 4),
+  ('bathrooms', 'Bathrooms', 'Privacy, cleanliness, safety, and care for bathroom spaces', true, true, 5)
 on conflict (key) do update set
   name = excluded.name,
   description = excluded.description,

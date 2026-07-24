@@ -8,12 +8,14 @@ dist/
 build/
 *.tsbuildinfo
 supabase/.temp/
+supabase/.branches/
 
 # local env files
 .env
 .env.*
 !.env.example
 losv2_login_credentials.txt
+TEST_CREDENTIALS.txt
 
 # logs
 npm-debug.log*

@@ -1056,6 +1056,272 @@ export type Database = {
           },
         ]
       }
+      graduate_values: {
+        Row: {
+          code: string
+          created_at: string
+          display_label: string
+          id: string
+          islamic_term: string
+          parent_r_value_id: string
+          school_id: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          code: string
+          created_at?: string
+          display_label: string
+          id?: string
+          islamic_term: string
+          parent_r_value_id: string
+          school_id: string
+          sort_order: number
+          updated_at?: string
+        }
+        Update: {
+          code?: string
+          created_at?: string
+          display_label?: string
+          id?: string
+          islamic_term?: string
+          parent_r_value_id?: string
+          school_id?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "graduate_values_parent_r_value_id_fkey"
+            columns: ["parent_r_value_id"]
+            isOneToOne: false
+            referencedRelation: "r_values"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "graduate_values_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_definition_graduate_values: {
+        Row: {
+          created_at: string
+          graduate_value_id: string
+          recognition_definition_id: string
+          relationship: string
+          school_id: string
+        }
+        Insert: {
+          created_at?: string
+          graduate_value_id: string
+          recognition_definition_id: string
+          relationship: string
+          school_id: string
+        }
+        Update: {
+          created_at?: string
+          graduate_value_id?: string
+          recognition_definition_id?: string
+          relationship?: string
+          school_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_definition_graduate_values_graduate_value_id_fkey"
+            columns: ["graduate_value_id"]
+            isOneToOne: false
+            referencedRelation: "graduate_values"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_definition_graduate_values_recognition_definition_id_fkey"
+            columns: ["recognition_definition_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_definition_graduate_values_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_definitions: {
+        Row: {
+          award_mode: string
+          code: string
+          created_at: string
+          description: string
+          fixed_points: number
+          framework_version: string
+          id: string
+          is_active: boolean
+          label: string
+          r_value_id: string
+          requires_note: boolean
+          school_id: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          award_mode: string
+          code: string
+          created_at?: string
+          description: string
+          fixed_points: number
+          framework_version?: string
+          id?: string
+          is_active?: boolean
+          label: string
+          r_value_id: string
+          requires_note?: boolean
+          school_id: string
+          sort_order: number
+          updated_at?: string
+        }
+        Update: {
+          award_mode?: string
+          code?: string
+          created_at?: string
+          description?: string
+          fixed_points?: number
+          framework_version?: string
+          id?: string
+          is_active?: boolean
+          label?: string
+          r_value_id?: string
+          requires_note?: boolean
+          school_id?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_definitions_fixed_points_fkey"
+            columns: ["fixed_points"]
+            isOneToOne: false
+            referencedRelation: "point_values"
+            referencedColumns: ["value"]
+          },
+          {
+            foreignKeyName: "recognition_definitions_r_value_id_fkey"
+            columns: ["r_value_id"]
+            isOneToOne: false
+            referencedRelation: "r_values"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_definitions_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      recognition_nominations: {
+        Row: {
+          approved_award_id: string | null
+          created_at: string
+          domain_id: string
+          explanation: string
+          id: string
+          idempotency_key: string
+          nominated_by_profile_id: string
+          observed_at: string
+          recognition_definition_id: string
+          review_note: string | null
+          reviewed_at: string | null
+          reviewed_by_profile_id: string | null
+          school_id: string
+          status: string
+          student_id: string
+          updated_at: string
+          witness_information: string | null
+        }
+        Insert: {
+          approved_award_id?: string | null
+          created_at?: string
+          domain_id: string
+          explanation: string
+          id?: string
+          idempotency_key: string
+          nominated_by_profile_id: string
+          observed_at?: string
+          recognition_definition_id: string
+          review_note?: string | null
+          reviewed_at?: string | null
+          reviewed_by_profile_id?: string | null
+          school_id: string
+          status?: string
+          student_id: string
+          updated_at?: string
+          witness_information?: string | null
+        }
+        Update: {
+          approved_award_id?: string | null
+          created_at?: string
+          domain_id?: string
+          explanation?: string
+          id?: string
+          idempotency_key?: string
+          nominated_by_profile_id?: string
+          observed_at?: string
+          recognition_definition_id?: string
+          review_note?: string | null
+          reviewed_at?: string | null
+          reviewed_by_profile_id?: string | null
+          school_id?: string
+          status?: string
+          student_id?: string
+          updated_at?: string
+          witness_information?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recognition_nominations_approved_award_id_fkey"
+            columns: ["approved_award_id"]
+            isOneToOne: true
+            referencedRelation: "recognition_logs"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_nominations_domain_id_fkey"
+            columns: ["domain_id"]
+            isOneToOne: false
+            referencedRelation: "domains"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_nominations_recognition_definition_id_fkey"
+            columns: ["recognition_definition_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_nominations_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_nominations_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       r_values: {
         Row: {
           created_at: string
@@ -1092,20 +1358,34 @@ export type Database = {
       recognition_logs: {
         Row: {
           admin_review_status: string
+          award_mode_snapshot: string | null
+          award_status: string
+          behaviour_description_snapshot: string | null
+          behaviour_label_snapshot: string | null
           behaviour_note: string
           created_at: string
           deduplication_key: string | null
           deleted_at: string | null
           domain_id: string
+          framework_version: string
           grade_snapshot: number | null
+          graduate_values_snapshot: Json
           house_snapshot: string
           id: string
           legacy_merit_log_id: string | null
+          observed_at: string
           parent_visible: boolean
           point_value: number
+          points_snapshot: number
           r_value_id: string
+          r_value_snapshot: string | null
           recognition_date: string
+          recognition_definition_id: string | null
+          recognition_nomination_id: string | null
           record_status: string
+          reversal_reason: string | null
+          reversed_at: string | null
+          reversed_by_profile_id: string | null
           school_id: string
           section_snapshot: string | null
           source: string
@@ -1114,25 +1394,40 @@ export type Database = {
           student_id: string
           student_name_snapshot: string
           student_visible: boolean
+          submission_idempotency_key: string | null
           updated_at: string
           visibility: string
         }
         Insert: {
           admin_review_status?: string
+          award_mode_snapshot?: string | null
+          award_status?: string
+          behaviour_description_snapshot?: string | null
+          behaviour_label_snapshot?: string | null
           behaviour_note: string
           created_at?: string
           deduplication_key?: string | null
           deleted_at?: string | null
           domain_id: string
+          framework_version?: string
           grade_snapshot?: number | null
+          graduate_values_snapshot?: Json
           house_snapshot: string
           id?: string
           legacy_merit_log_id?: string | null
+          observed_at: string
           parent_visible?: boolean
           point_value: number
+          points_snapshot: number
           r_value_id: string
+          r_value_snapshot?: string | null
           recognition_date: string
+          recognition_definition_id?: string | null
+          recognition_nomination_id?: string | null
           record_status?: string
+          reversal_reason?: string | null
+          reversed_at?: string | null
+          reversed_by_profile_id?: string | null
           school_id: string
           section_snapshot?: string | null
           source?: string
@@ -1141,25 +1436,40 @@ export type Database = {
           student_id: string
           student_name_snapshot: string
           student_visible?: boolean
+          submission_idempotency_key?: string | null
           updated_at?: string
           visibility: string
         }
         Update: {
           admin_review_status?: string
+          award_mode_snapshot?: string | null
+          award_status?: string
+          behaviour_description_snapshot?: string | null
+          behaviour_label_snapshot?: string | null
           behaviour_note?: string
           created_at?: string
           deduplication_key?: string | null
           deleted_at?: string | null
           domain_id?: string
+          framework_version?: string
           grade_snapshot?: number | null
+          graduate_values_snapshot?: Json
           house_snapshot?: string
           id?: string
           legacy_merit_log_id?: string | null
+          observed_at?: string
           parent_visible?: boolean
           point_value?: number
+          points_snapshot?: number
           r_value_id?: string
+          r_value_snapshot?: string | null
           recognition_date?: string
+          recognition_definition_id?: string | null
+          recognition_nomination_id?: string | null
           record_status?: string
+          reversal_reason?: string | null
+          reversed_at?: string | null
+          reversed_by_profile_id?: string | null
           school_id?: string
           section_snapshot?: string | null
           source?: string
@@ -1168,6 +1478,7 @@ export type Database = {
           student_id?: string
           student_name_snapshot?: string
           student_visible?: boolean
+          submission_idempotency_key?: string | null
           updated_at?: string
           visibility?: string
         }
@@ -1191,6 +1502,20 @@ export type Database = {
             columns: ["r_value_id"]
             isOneToOne: false
             referencedRelation: "r_values"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_logs_recognition_definition_id_fkey"
+            columns: ["recognition_definition_id"]
+            isOneToOne: false
+            referencedRelation: "recognition_definitions"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "recognition_logs_recognition_nomination_id_fkey"
+            columns: ["recognition_nomination_id"]
+            isOneToOne: true
+            referencedRelation: "recognition_nominations"
             referencedColumns: ["id"]
           },
           {
@@ -1429,6 +1754,51 @@ export type Database = {
       }
     }
     Views: {
+      v_active_recognition_awards: {
+        Row: {
+          admin_review_status: string | null
+          award_mode_snapshot: string | null
+          award_status: string | null
+          behaviour_description_snapshot: string | null
+          behaviour_label_snapshot: string | null
+          behaviour_note: string | null
+          created_at: string | null
+          deduplication_key: string | null
+          deleted_at: string | null
+          domain_id: string | null
+          framework_version: string | null
+          grade_snapshot: number | null
+          graduate_values_snapshot: Json | null
+          house_snapshot: string | null
+          id: string | null
+          legacy_merit_log_id: string | null
+          observed_at: string | null
+          parent_visible: boolean | null
+          point_value: number | null
+          points_snapshot: number | null
+          r_value_id: string | null
+          r_value_snapshot: string | null
+          recognition_date: string | null
+          recognition_definition_id: string | null
+          recognition_nomination_id: string | null
+          record_status: string | null
+          reversal_reason: string | null
+          reversed_at: string | null
+          reversed_by_profile_id: string | null
+          school_id: string | null
+          section_snapshot: string | null
+          source: string | null
+          staff_name_snapshot: string | null
+          staff_user_id: string | null
+          student_id: string | null
+          student_name_snapshot: string | null
+          student_visible: boolean | null
+          submission_idempotency_key: string | null
+          updated_at: string | null
+          visibility: string | null
+        }
+        Relationships: []
+      }
       v_award_eligible_recognitions: {
         Row: {
           behaviour_note: string | null
@@ -1485,6 +1855,83 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      v_recognition_possible_duplicates: {
+        Row: {
+          behaviour_code: string | null
+          behaviour_description: string | null
+          behaviour_label: string | null
+          created_at: string | null
+          domain_code: string | null
+          domain_id: string | null
+          domain_name: string | null
+          framework_version: string | null
+          grade_snapshot: number | null
+          graduate_value_codes: string[] | null
+          graduate_value_labels: string | null
+          graduate_values_snapshot: Json | null
+          house_snapshot: string | null
+          id: string | null
+          note: string | null
+          observed_at: string | null
+          parent_visible: boolean | null
+          points: number | null
+          previous_matching_award_at: string | null
+          r_value_code: string | null
+          r_value_id: string | null
+          r_value_name: string | null
+          recognition_date: string | null
+          recognition_definition_id: string | null
+          recognition_mode: string | null
+          recognition_nomination_id: string | null
+          school_id: string | null
+          section_snapshot: string | null
+          staff_name_snapshot: string | null
+          staff_user_id: string | null
+          student_id: string | null
+          student_name_snapshot: string | null
+          student_visible: boolean | null
+          visibility: string | null
+        }
+        Relationships: []
+      }
+      v_recognition_reporting: {
+        Row: {
+          behaviour_code: string | null
+          behaviour_description: string | null
+          behaviour_label: string | null
+          created_at: string | null
+          domain_code: string | null
+          domain_id: string | null
+          domain_name: string | null
+          framework_version: string | null
+          grade_snapshot: number | null
+          graduate_value_codes: string[] | null
+          graduate_value_labels: string | null
+          graduate_values_snapshot: Json | null
+          house_snapshot: string | null
+          id: string | null
+          note: string | null
+          observed_at: string | null
+          parent_visible: boolean | null
+          points: number | null
+          r_value_code: string | null
+          r_value_id: string | null
+          r_value_name: string | null
+          recognition_date: string | null
+          recognition_definition_id: string | null
+          recognition_mode: string | null
+          recognition_nomination_id: string | null
+          school_id: string | null
+          section_snapshot: string | null
+          staff_name_snapshot: string | null
+          staff_user_id: string | null
+          student_id: string | null
+          student_name_snapshot: string | null
+          student_visible: boolean | null
+          visibility: string | null
+        }
+        Relationships: []
       }
       v_current_award_candidate_scores: {
         Row: {
@@ -1563,6 +2010,18 @@ export type Database = {
       }
     }
     Functions: {
+      create_recognition_awards_v2: {
+        Args: {
+          p_domain_code: string
+          p_idempotency_key: string
+          p_note?: string
+          p_observed_at?: string
+          p_recognition_definition_code: string
+          p_student_ids: string[]
+          p_visibility?: string
+        }
+        Returns: Json
+      }
       create_quarterly_award_period: {
         Args: {
           p_baseline_period_id?: string
@@ -1615,6 +2074,26 @@ export type Database = {
         Args: { p_dismiss?: boolean; p_notification_id: string }
         Returns: Json
       }
+      recognition_graduate_value_snapshot: {
+        Args: { p_definition_id: string }
+        Returns: Json
+      }
+      recognition_submission_result: {
+        Args: { p_idempotency_key: string; p_school_id: string }
+        Returns: Json
+      }
+      review_recognition_nomination_v2: {
+        Args: {
+          p_decision: string
+          p_nomination_id: string
+          p_review_note?: string
+        }
+        Returns: Json
+      }
+      reverse_recognition_award_v2: {
+        Args: { p_award_id: string; p_reason: string }
+        Returns: Json
+      }
       persist_quarterly_award_score_snapshots: {
         Args: {
           p_calculation_metadata: Json
@@ -1650,6 +2129,22 @@ export type Database = {
           p_recipient_slot?: number
           p_scope_key?: string
           p_scope_type?: string
+        }
+        Returns: Json
+      }
+      set_recognition_definition_active_v2: {
+        Args: { p_definition_code: string; p_is_active: boolean }
+        Returns: Json
+      }
+      submit_recognition_nomination_v2: {
+        Args: {
+          p_domain_code: string
+          p_explanation: string
+          p_idempotency_key: string
+          p_observed_at?: string
+          p_recognition_definition_code: string
+          p_student_id: string
+          p_witness_information?: string
         }
         Returns: Json
       }
@@ -1694,6 +2189,10 @@ export type Database = {
           p_source_type: string
           p_weight?: number
         }
+        Returns: Json
+      }
+      withdraw_recognition_nomination_v2: {
+        Args: { p_nomination_id: string }
         Returns: Json
       }
       write_honours_audit: {

@@ -18,6 +18,8 @@ export async function GET() {
       .eq('staff_user_id', context.user.id)
       .eq('record_status', 'active')
       .is('deleted_at', null)
+      .eq('award_status', 'approved')
+      .in('admin_review_status', ['approved', 'not_required'])
       .order('created_at', { ascending: false })
       .limit(8),
     context.admin
@@ -26,6 +28,8 @@ export async function GET() {
       .eq('school_id', context.schoolId!)
       .eq('record_status', 'active')
       .is('deleted_at', null)
+      .eq('award_status', 'approved')
+      .in('admin_review_status', ['approved', 'not_required'])
       .gte('created_at', since.toISOString()),
     context.admin
       .from('students')

@@ -1,29 +1,29 @@
 import { NextResponse } from 'next/server'
 import { isAuthError, jsonError, requireStaff } from '@/lib/auth/server'
-import { parseDirectAwardRequest, recognitionErrorMessage } from '@/lib/recognition/validation'
+import { parseNominationRequest, recognitionErrorMessage } from '@/lib/recognition/validation'
 
 export async function POST(request: Request) {
   const context = await requireStaff()
   if (isAuthError(context)) return context.error
   if (!context.schoolId) return jsonError('School profile is not configured.', 403)
 
-  const parsed = parseDirectAwardRequest(await request.json().catch(() => ({})))
+  const parsed = parseNominationRequest(await request.json().catch(() => ({})))
   if (!parsed.ok) return jsonError(parsed.error)
   const value = parsed.value
 
-  const { data, error } = await context.supabase.rpc('create_recognition_awards_v2', {
-    p_student_ids: value.studentIds,
+  const { data, error } = await context.supabase.rpc('submit_recognition_nomination_v2', {
+    p_student_id: value.studentId,
     p_recognition_definition_code: value.recognitionDefinitionCode,
     p_domain_code: value.domainCode,
+    p_explanation: value.explanation,
     p_idempotency_key: value.idempotencyKey,
-    p_note: value.note ?? undefined,
+    p_witness_information: value.witnessInformation ?? undefined,
     p_observed_at: value.observedAt,
-    p_visibility: value.visibility,
   })
 
   if (error) {
     const status = error.code === '42501' ? 403 : error.message.includes('already') ? 409 : 400
     return NextResponse.json({ error: recognitionErrorMessage(error.message) }, { status })
   }
-  return NextResponse.json(data, { status: 201 })
+  return NextResponse.json({ nomination: data }, { status: 201 })
 }
