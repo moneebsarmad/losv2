@@ -1,7 +1,7 @@
 'use client'
 
 import type { ReactNode } from 'react'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '../providers'
 import { AppShell } from '@/components/app-shell/AppShell'
@@ -15,39 +15,53 @@ const supabase = createSupabaseBrowserClient()
 export default function DashboardLayout({ children }: { children: ReactNode }) {
   const router = useRouter()
   const { user, loading } = useAuth()
+  const userId = user?.id
+  const userEmail = user?.email
   const [role, setRole] = useState<PortalRole | null>(null)
   const [displayName, setDisplayName] = useState('User')
   const [profileLoading, setProfileLoading] = useState(true)
+  const loadedProfileUserId = useRef<string | null>(null)
 
   useEffect(() => {
-    if (!loading && !user) router.replace('/')
-  }, [loading, router, user])
+    if (!loading && !userId) router.replace('/')
+  }, [loading, router, userId])
 
   useEffect(() => {
-    if (!user?.id) return
+    if (!userId) return
+
+    const profileUserId = userId
+    let cancelled = false
 
     async function loadProfile() {
-      setProfileLoading(true)
+      if (loadedProfileUserId.current !== profileUserId) setProfileLoading(true)
+
       const { data } = await supabase
         .from('profiles')
         .select('role, full_name, name, staff_name, student_name, email')
-        .eq('id', user?.id)
+        .eq('id', profileUserId)
         .maybeSingle()
+
+      if (cancelled) return
 
       const nextRole = toPortalRole(String(data?.role ?? ''))
       setRole(nextRole)
 
-      const fallback = user?.email?.split('@')[0]?.replace(/[._-]+/g, ' ') || 'User'
+      const fallback = userEmail?.split('@')[0]?.replace(/[._-]+/g, ' ') || 'User'
       setDisplayName(
         String(data?.full_name ?? data?.name ?? data?.staff_name ?? data?.student_name ?? fallback)
           .trim()
           .replace(/\b\w/g, (letter) => letter.toUpperCase())
       )
+      loadedProfileUserId.current = profileUserId
       setProfileLoading(false)
     }
 
-    loadProfile()
-  }, [user])
+    void loadProfile()
+
+    return () => {
+      cancelled = true
+    }
+  }, [userEmail, userId])
 
   if (loading || profileLoading) {
     return (

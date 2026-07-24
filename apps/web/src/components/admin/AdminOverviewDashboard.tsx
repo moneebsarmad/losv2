@@ -1,6 +1,6 @@
 'use client'
 
-import { FormEvent, useEffect, useMemo, useState } from 'react'
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Download, RefreshCw } from 'lucide-react'
 import { DistributionList } from '@/components/charts/DistributionList'
@@ -10,7 +10,12 @@ import { LoadingState } from '@/components/ui/LoadingState'
 import { MetricCard } from '@/components/ui/MetricCard'
 import { MissedStudentsPanel } from '@/components/admin/MissedStudentsPanel'
 import { HOUSE_NAMES } from '@/lib/constants/formation'
+import { createSupabaseBrowserClient } from '@/lib/supabase/client'
 import type { PointValueRow, RecognitionLog, ReferenceRow } from '@/types'
+
+const supabase = createSupabaseBrowserClient()
+const BACKGROUND_REFRESH_INTERVAL_MS = 60_000
+const REALTIME_REFRESH_DEBOUNCE_MS = 350
 
 type DistributionRow = { name: string; value: number }
 
@@ -61,6 +66,7 @@ export function AdminOverviewDashboard({
   const [appliedFilters, setAppliedFilters] = useState(filters)
   const [payload, setPayload] = useState<AdminOverviewPayload | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const requestSequence = useRef(0)
 
   const query = useMemo(() => {
     const params = new URLSearchParams()
@@ -86,21 +92,68 @@ export function AdminOverviewDashboard({
     loadReferences()
   }, [])
 
-  useEffect(() => {
-    async function loadOverview() {
-      setPayload(null)
-      const response = await fetch(`/api/admin/formation-overview?${query}`)
+  const loadOverview = useCallback(async () => {
+    const requestId = ++requestSequence.current
+
+    try {
+      const response = await fetch(`/api/admin/formation-overview?${query}`, { cache: 'no-store' })
       const data = await response.json().catch(() => ({}))
+
+      if (requestId !== requestSequence.current) return
+
       if (!response.ok) {
         setError(data.error ?? 'Unable to load admin overview.')
         return
       }
+
       setError(null)
       setPayload(data)
+    } catch {
+      if (requestId === requestSequence.current) {
+        setError('Unable to load admin overview.')
+      }
+    }
+  }, [query])
+
+  useEffect(() => {
+    void loadOverview()
+  }, [loadOverview])
+
+  useEffect(() => {
+    let refreshTimer: ReturnType<typeof setTimeout> | null = null
+
+    function queueRefresh(delay = REALTIME_REFRESH_DEBOUNCE_MS) {
+      if (document.visibilityState !== 'visible') return
+      if (refreshTimer) clearTimeout(refreshTimer)
+      refreshTimer = setTimeout(() => {
+        refreshTimer = null
+        void loadOverview()
+      }, delay)
     }
 
-    loadOverview()
-  }, [query])
+    const channel = supabase
+      .channel('admin-overview-recognition-updates')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'recognition_logs' },
+        () => queueRefresh()
+      )
+      .subscribe()
+
+    const interval = window.setInterval(() => queueRefresh(0), BACKGROUND_REFRESH_INTERVAL_MS)
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') queueRefresh(0)
+    }
+
+    document.addEventListener('visibilitychange', handleVisibilityChange)
+
+    return () => {
+      if (refreshTimer) clearTimeout(refreshTimer)
+      window.clearInterval(interval)
+      document.removeEventListener('visibilitychange', handleVisibilityChange)
+      void supabase.removeChannel(channel)
+    }
+  }, [loadOverview])
 
   function apply(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()

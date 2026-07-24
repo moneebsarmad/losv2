@@ -17,20 +17,31 @@ const supabase = createSupabaseBrowserClient()
 
 export default function DashboardPage() {
   const { user } = useAuth()
+  const userId = user?.id
   const [role, setRole] = useState<PortalRole | null>(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    if (!user?.id) return
+    if (!userId) return
+
+    let cancelled = false
 
     async function loadRole() {
-      const { data } = await supabase.from('profiles').select('role').eq('id', user?.id).maybeSingle()
+      setLoading(true)
+      const { data } = await supabase.from('profiles').select('role').eq('id', userId).maybeSingle()
+
+      if (cancelled) return
+
       setRole(toPortalRole(String(data?.role ?? '')))
       setLoading(false)
     }
 
-    loadRole()
-  }, [user])
+    void loadRole()
+
+    return () => {
+      cancelled = true
+    }
+  }, [userId])
 
   if (loading) {
     return (
