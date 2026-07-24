@@ -874,6 +874,70 @@ button {
   background: linear-gradient(90deg, var(--gold), var(--gold-bright));
 }
 
+/* ── SUPER ADMIN BANNER ─────────────────────────────────────────────────── */
+
+.super-admin-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 24px;
+  background: color-mix(in srgb, var(--gold) 12%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 30%, transparent);
+  font-size: 13px;
+  color: var(--text);
+}
+
+.super-admin-banner a {
+  color: var(--gold);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.super-admin-banner a:hover {
+  text-decoration: underline;
+}
+
+/* ── CHILD SWITCHER (PARENT) ─────────────────────────────────────────────── */
+
+.child-switcher {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.child-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid color-mix(in srgb, var(--child-color, var(--gold)) 40%, transparent);
+  background: transparent;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.child-tab:hover {
+  background: color-mix(in srgb, var(--child-color, var(--gold)) 12%, transparent);
+}
+
+.child-tab.active {
+  background: color-mix(in srgb, var(--child-color, var(--gold)) 18%, transparent);
+  border-color: var(--child-color, var(--gold));
+  color: var(--child-color, var(--gold));
+}
+
+.child-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--child-color, var(--gold));
+  flex-shrink: 0;
+}
+
 /* ── RESPONSIVE ─────────────────────────────────────────────────────────── */
 
 @media (min-width: 1100px) {

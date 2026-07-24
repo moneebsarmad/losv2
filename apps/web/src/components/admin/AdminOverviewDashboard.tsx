@@ -41,12 +41,18 @@ function dateDaysAgo(days: number) {
   return date.toISOString().slice(0, 10)
 }
 
-export function AdminOverviewDashboard({ title = 'Tarbiyah overview' }: { title?: string }) {
+export function AdminOverviewDashboard({
+  title = 'Tarbiyah overview',
+  lockedHouse,
+}: {
+  title?: string
+  lockedHouse?: string
+}) {
   const [references, setReferences] = useState<ReferencePayload>({ rValues: [], domains: [], pointValues: [] })
   const [filters, setFilters] = useState({
     start: dateDaysAgo(30),
     end: new Date().toISOString().slice(0, 10),
-    house: '',
+    house: lockedHouse ?? '',
     grade: '',
     staff: '',
     r: '',
@@ -130,15 +136,17 @@ export function AdminOverviewDashboard({ title = 'Tarbiyah overview' }: { title?
             <label htmlFor="end">End</label>
             <input id="end" className="input" type="date" value={filters.end} onChange={(event) => setFilters({ ...filters, end: event.target.value })} />
           </div>
-          <div className="field" style={{ margin: 0 }}>
-            <label htmlFor="house">House</label>
-            <select id="house" className="select" value={filters.house} onChange={(event) => setFilters({ ...filters, house: event.target.value })}>
-              <option value="">All houses</option>
-              {HOUSE_NAMES.map((house) => (
-                <option key={house} value={house}>{house}</option>
-              ))}
-            </select>
-          </div>
+          {!lockedHouse && (
+            <div className="field" style={{ margin: 0 }}>
+              <label htmlFor="house">House</label>
+              <select id="house" className="select" value={filters.house} onChange={(event) => setFilters({ ...filters, house: event.target.value })}>
+                <option value="">All houses</option>
+                {HOUSE_NAMES.map((house) => (
+                  <option key={house} value={house}>{house}</option>
+                ))}
+              </select>
+            </div>
+          )}
           <div className="field" style={{ margin: 0 }}>
             <label htmlFor="grade">Grade</label>
             <input id="grade" className="input" value={filters.grade} onChange={(event) => setFilters({ ...filters, grade: event.target.value })} placeholder="Any" />

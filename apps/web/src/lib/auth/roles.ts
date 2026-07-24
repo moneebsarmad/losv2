@@ -13,8 +13,10 @@ export const STAFF_ROLES: AppRole[] = [
 
 export function toPortalRole(role: string | null | undefined): PortalRole | null {
   if (!role) return null
+  if (role === 'super_admin') return 'super_admin'
   if (role === 'student') return 'student'
   if (role === 'parent') return 'parent'
+  if (role === 'house_mentor') return 'house_mentor'
   if (ADMIN_ROLES.includes(role as AppRole)) return 'admin'
   if (STAFF_ROLES.includes(role as AppRole)) return 'staff'
   return null

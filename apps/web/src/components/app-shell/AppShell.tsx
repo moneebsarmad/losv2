@@ -13,6 +13,7 @@ import {
   ShieldCheck,
   Trophy,
   UserRound,
+  Users,
   UsersRound,
 } from 'lucide-react'
 import { useAuth } from '@/app/providers'
@@ -26,6 +27,32 @@ type AppShellProps = {
 }
 
 const navByRole: Record<PortalRole, Array<{ label: string; href: string; icon: ReactNode }>> = {
+  super_admin: [
+    { label: 'Tarbiyah', href: '/dashboard', icon: <ShieldCheck size={18} /> },
+    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
+    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
+    { label: 'Reports', href: '/dashboard/admin/reports', icon: <BarChart3 size={18} /> },
+    { label: 'Audit', href: '/dashboard/admin/audit', icon: <FileClock size={18} /> },
+    { label: 'Users', href: '/dashboard/admin/users', icon: <Users size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
+  ],
+  admin: [
+    { label: 'Tarbiyah', href: '/dashboard', icon: <ShieldCheck size={18} /> },
+    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
+    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
+    { label: 'Reports', href: '/dashboard/admin/reports', icon: <BarChart3 size={18} /> },
+    { label: 'Audit', href: '/dashboard/admin/audit', icon: <FileClock size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
+  ],
+  house_mentor: [
+    { label: 'My House', href: '/dashboard', icon: <Trophy size={18} /> },
+    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
+    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
+    { label: 'Houses', href: '/dashboard/houses', icon: <BarChart3 size={18} /> },
+    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
+  ],
   staff: [
     { label: 'Dashboard', href: '/dashboard', icon: <Home size={18} /> },
     { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
@@ -44,15 +71,15 @@ const navByRole: Record<PortalRole, Array<{ label: string; href: string; icon: R
     { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
     { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
   ],
-  admin: [
-    { label: 'Tarbiyah', href: '/dashboard', icon: <ShieldCheck size={18} /> },
-    { label: 'Recognise', href: '/dashboard/recognize', icon: <ClipboardPlus size={18} /> },
-    { label: 'Students', href: '/dashboard/students', icon: <UsersRound size={18} /> },
-    { label: 'Houses', href: '/dashboard/houses', icon: <Trophy size={18} /> },
-    { label: 'Reports', href: '/dashboard/admin/reports', icon: <BarChart3 size={18} /> },
-    { label: 'Audit', href: '/dashboard/admin/audit', icon: <FileClock size={18} /> },
-    { label: 'Settings', href: '/dashboard/settings', icon: <Settings size={18} /> },
-  ],
+}
+
+const roleLabels: Record<PortalRole, string> = {
+  super_admin: 'Super Admin',
+  admin: 'Admin',
+  house_mentor: 'House Mentor',
+  staff: 'Staff',
+  student: 'Student',
+  parent: 'Parent',
 }
 
 export function AppShell({ role, userName, children }: AppShellProps) {
@@ -82,7 +109,7 @@ export function AppShell({ role, userName, children }: AppShellProps) {
         <div className="header-right">
           <div className="header-user">
             <strong>{userName}</strong>
-            <span className="header-role">{role}</span>
+            <span className="header-role">{roleLabels[role]}</span>
           </div>
           <button className="btn btn-header-signout" type="button" onClick={handleSignOut}>
             <LogOut size={15} />
