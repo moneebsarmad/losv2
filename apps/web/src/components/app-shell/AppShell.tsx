@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   Trophy,
   UserRound,
+  Users,
   UsersRound,
 } from 'lucide-react'
 import { useAuth } from '@/app/providers'
@@ -38,6 +39,16 @@ const navigationIcons: Record<NavigationIcon, ReactNode> = {
   admin: <ShieldCheck size={18} />,
   honours: <Award size={18} />,
   audit: <FileClock size={18} />,
+  users: <Users size={18} />,
+}
+
+const roleLabels: Record<string, string> = {
+  super_admin: 'Super Admin',
+  admin: 'Admin',
+  house_mentor: 'House Mentor',
+  staff: 'Staff',
+  student: 'Student',
+  parent: 'Parent',
 }
 
 export function AppShell({ role, userName, children }: AppShellProps) {
@@ -67,7 +78,7 @@ export function AppShell({ role, userName, children }: AppShellProps) {
         <div className="header-right">
           <div className="header-user">
             <strong>{userName}</strong>
-            <span className="header-role">{role}</span>
+            <span className="header-role">{roleLabels[role] ?? role}</span>
           </div>
           <button className="btn btn-header-signout" type="button" onClick={handleSignOut}>
             <LogOut size={15} />

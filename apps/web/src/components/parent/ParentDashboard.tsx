@@ -7,6 +7,7 @@ import { RingGrid } from '@/components/charts/RingGrid'
 import { RecognitionFeed } from '@/components/recognition/RecognitionFeed'
 import { LoadingState } from '@/components/ui/LoadingState'
 import { MetricCard } from '@/components/ui/MetricCard'
+import { HOUSE_COLORS } from '@/lib/constants/formation'
 import type { RecognitionLog, StudentSummary } from '@/types'
 
 type Child = StudentSummary & {
@@ -106,18 +107,26 @@ export function ParentDashboard() {
           <h1 className="page-title">Formation you can reinforce at home.</h1>
           <p className="page-subtitle">Only parent-approved recognition notes are shown here.</p>
         </div>
-        <div className="toolbar">
-          {children.map((child) => (
-            <button
-              className={`btn ${selectedId === child.id ? 'btn-gold' : 'btn-soft'}`}
-              key={child.id}
-              onClick={() => setSelectedId(child.id)}
-              type="button"
-            >
-              {child.student_name}
-            </button>
-          ))}
-        </div>
+        {children.length > 1 && (
+          <div className="child-switcher">
+            {children.map((child) => {
+              const houseColor = HOUSE_COLORS[child.house]
+              const isActive = selectedId === child.id
+              return (
+                <button
+                  className={`child-tab ${isActive ? 'active' : ''}`}
+                  key={child.id}
+                  onClick={() => setSelectedId(child.id)}
+                  type="button"
+                  style={isActive ? { '--child-color': houseColor } as React.CSSProperties : undefined}
+                >
+                  <span className="child-dot" style={{ background: houseColor }} />
+                  {child.student_name}
+                </button>
+              )
+            })}
+          </div>
+        )}
       </header>
 
       {loadingGrowth || !growth ? (

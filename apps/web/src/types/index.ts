@@ -9,7 +9,7 @@ export type AppRole =
   | 'student'
   | 'parent'
 
-export type PortalRole = 'staff' | 'student' | 'parent' | 'admin'
+export type PortalRole = 'super_admin' | 'admin' | 'house_mentor' | 'staff' | 'student' | 'parent'
 
 export type ReferenceRow = {
   id: string

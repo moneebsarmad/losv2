@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 import { AdminOverviewDashboard } from '@/components/admin/AdminOverviewDashboard'
+import { HouseMentorDashboard } from '@/components/staff/HouseMentorDashboard'
+import { SuperAdminDashboard } from '@/components/admin/SuperAdminDashboard'
 import { ParentDashboard } from '@/components/parent/ParentDashboard'
 import { StaffDashboard } from '@/components/staff/StaffDashboard'
 import { StudentGrowthDashboard } from '@/components/student/StudentGrowthDashboard'
@@ -39,7 +41,9 @@ export default function DashboardPage() {
     )
   }
 
+  if (role === 'super_admin') return <SuperAdminDashboard />
   if (role === 'admin') return <AdminOverviewDashboard />
+  if (role === 'house_mentor') return <HouseMentorDashboard />
   if (role === 'student') return <StudentGrowthDashboard />
   if (role === 'parent') return <ParentDashboard />
   return <StaffDashboard />
